@@ -1,8 +1,8 @@
 import '@styles/globals.css'
 
 export const metadata = {
-    title: 'Pail',
-    description: 'Stake with other customers to multiply your buying power.'
+    title: 'Pail Sellers',
+    description: 'Sell on the Pail platform.'
 }
 
 const RootLayout = ( { children }) => {
