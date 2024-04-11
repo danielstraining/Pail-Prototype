@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Nav = () => {
   return (
-    <nav className="flex justify-between items-center w-full px-36 py-5">
+    <nav className="flex justify-between items-center w-full px-28 py-5">
         <div>
             <Link href="/" className="">
                 <Image 
