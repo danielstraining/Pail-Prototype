@@ -4,7 +4,6 @@ import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Image from "next/image";
 import { useRouter } from "next/navigation"
-import { connectToDB } from '@utils/database';
 
 const Home = () => {
     const router = useRouter();
