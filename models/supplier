@@ -35,4 +35,4 @@ supplierSchema.pre('save', function(next) {
 
 const Supplier = models.Supplier || model("Supplier", supplierSchema)
 
-export default supplierSchema;
+export default Supplier;
