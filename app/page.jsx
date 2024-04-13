@@ -4,13 +4,13 @@ import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Image from "next/image";
 import { useRouter } from "next/navigation"
+import { connectToDB } from '@utils/database';
 
 const Home = () => {
     const router = useRouter();
-    const margin = 36
 
     const handleSignUp = () => {
-        router.push("/signup")
+        router.push("/signup");
     }
 
     return (
