@@ -3,9 +3,16 @@
 import '@styles/globals.css'
 import Nav from '@components/Nav'
 import Image from "next/image";
+import { useRouter } from "next/navigation"
 
 const Home = () => {
+    const router = useRouter();
     const margin = 36
+
+    const handleSignUp = () => {
+        router.push("/signup")
+    }
+
     return (
         <div>
             <Nav/>
@@ -16,7 +23,7 @@ const Home = () => {
                         <p className='text-2xl font-palanquin my-10'>Reach more customers than ever before</p>
                         <button
                             type="button"
-                            onClick = {() => {}}
+                            onClick = {handleSignUp}
                             className="black_btn my-10">
                             Sign Up
                         </button> 
@@ -81,7 +88,7 @@ const Home = () => {
                         <div className='w-full h-full flex justify-center align-middle'>
                             <button
                                 type="button"
-                                onClick = {() => {}}
+                                onClick = {handleSignUp}
                                 className="black_btn my-20 z-10">
                                 Sign Up
                             </button> 
