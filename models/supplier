@@ -13,6 +13,7 @@ const supplierSchema = new Schema({
     password: {
         type: String,
         required: true, // Password is required
+        minlength: 8, // Example: Minimum length of 6 characters
     },
     active: {
         type: Boolean,
