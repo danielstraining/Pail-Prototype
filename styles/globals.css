@@ -10,3 +10,11 @@
 .black_btn {
     @apply rounded-xl border-2 border-black bg-black py-2 px-5 text-white transition-all hover:bg-white hover:text-black text-center text-3xl font-palanquin flex items-center justify-center;
   }
+
+.form_input {
+  @apply w-full p-2 mt-2 rounded-lg outline-none shadow-sm;
+}
+
+.input_header {
+  @apply text-sm text-gray-500 px-3;
+}
