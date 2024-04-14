@@ -1,11 +1,26 @@
-"use client"
-
 import Image from "next/image";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { connectToDB } from "@utils/database";
+import Supplier from "@models/supplier";
+
 
 function SignUp(){
-    const [formInput, setFormInput] = useState();
+
+    async function registerSeller(event){ // Might need to put this into an api endpoint 
+        "use server"
+        console.log("beginning registration")
+        console.log("connecting to db")
+        await connectToDB();
+        console.log("adding suppler")
+        await Supplier.create({
+            email: event.get('email'),
+            password: event.get('password'),
+        })
+        console.log('user added to database')
+
+
+        console.log(event.get('email'))
+    }
 
     return (
         <>
@@ -22,7 +37,7 @@ function SignUp(){
                         <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
                         <form 
                             className="!m-0 p-0"
-                            onSubmit={() => {}}
+                            action={registerSeller}
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
@@ -30,7 +45,7 @@ function SignUp(){
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>
-                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></input> 
+                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input> 
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Confirm Password</h2>

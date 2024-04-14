@@ -3,7 +3,7 @@ import { Schema, model, models } from "mongoose";
 const supplierSchema = new Schema({
     name: {
         type: String,
-        unique: true, // Ensures uniqueness of the business name
+        default: "",
     },
     email: {
         type: String,
