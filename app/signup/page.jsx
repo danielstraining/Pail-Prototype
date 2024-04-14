@@ -5,6 +5,8 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function SignUp(){
+    const [formInput, setFormInput] = useState();
+
     return (
         <>
             <div className="h-screen w-screen flex justify-center items-center">
@@ -24,15 +26,15 @@ function SignUp(){
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
-                                <input className="form_input" required name="email"></input>   
+                                <input className="form_input" placeholder="example@business.com" required name="email"></input>   
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>
-                                <input className="form_input" required name="password"></input> 
+                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"></input> 
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Confirm Password</h2>
-                                <input className="form_input" required name="confirmPassword"></input> 
+                                <input className="form_input" type="password" required name="confirmPassword"></input> 
                             </div>
                             <button
                                 type="submit"
