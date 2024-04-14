@@ -1,25 +1,29 @@
+"use client"
+
 import Image from "next/image";
 import Link from "next/link";
-import { connectToDB } from "@utils/database";
-import Supplier from "@models/supplier";
-
 
 function SignUp(){
 
-    async function registerSeller(event){ // Might need to put this into an api endpoint 
-        "use server"
-        console.log("beginning registration")
-        console.log("connecting to db")
-        await connectToDB();
-        console.log("adding suppler")
-        await Supplier.create({
-            email: event.get('email'),
-            password: event.get('password'),
-        })
-        console.log('user added to database')
+    const handleSubmit = async (e) => {
+        console.log(e)
+        try {
+            const response = await fetch("/api/supplier/new", {
+                method: "POST",
+                body: JSON.stringify({
+                email: e.get('email'),
+                password: e.get('password'),
+                }),
+            });
+        
+            if (response.ok) {
+                console.log("API RESPONSE OK")
+            }
 
-
-        console.log(event.get('email'))
+        } catch (error) {
+            console.log("API RESPONSE ERROR")
+            console.log(error)
+        }
     }
 
     return (
@@ -37,7 +41,7 @@ function SignUp(){
                         <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
                         <form 
                             className="!m-0 p-0"
-                            action={registerSeller}
+                            action={handleSubmit}
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
@@ -66,4 +70,4 @@ function SignUp(){
 }
 
 
-export default SignUp
+export default SignUp;
