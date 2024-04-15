@@ -11,7 +11,9 @@ export const POST = async (request) => {
         const newSupplier = new Supplier({ email: email, password: password});
         console.log("new supplier...")
         console.log(newSupplier)
+
         await newSupplier.save();
+        
         console.log('Save Successful!')
         return new Response(JSON.stringify(newSupplier), { status: 201 })
     } catch (error) {
