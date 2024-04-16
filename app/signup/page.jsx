@@ -5,24 +5,24 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function SignUp(){
-    // email in use
     const [existingEmailError, setexistingEmailError] = useState(false);
-    // non-matching passwords
     const [passwordMatchError, setpasswordMatchError] = useState(false);
     // button timeout
 
     const passwordMatching = (pw1, pw2) =>{
-        if (pw1 !== pw2){
-            setpasswordMatchError(true)
-        }
+        return pw1 === pw2
     }
 
     const runInitialChecks = async (email, password, confirmPassword) => {
         let result = true
-        if (passwordMatching(password, confirmPassword)) {
-            setNoPasswordMatch(true)
+
+        // Do the passwords match?
+        if (!passwordMatching(password, confirmPassword)) {
+            setpasswordMatchError(true)
             result = false
         }
+
+        // Is the email already registered?
 
         return result
     }
@@ -49,12 +49,12 @@ function SignUp(){
 
     const handleSubmit = async (e) => {
         console.log(e)
-        
+
         const email = e.get('email')
         const password = e.get('password')
         const confirmPassword = e.get('confirmPassword')
 
-        const initialChecks = await runInitialChecks()
+        const initialChecks = await runInitialChecks(email, password, confirmPassword)
 
         if (initialChecks){
             addSupplier(email, password)
