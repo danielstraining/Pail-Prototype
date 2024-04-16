@@ -2,17 +2,38 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState, useEffect } from "react";
 
 function SignUp(){
+    // email in use
+    const [existingEmailError, setexistingEmailError] = useState(false);
+    // non-matching passwords
+    const [passwordMatchError, setpasswordMatchError] = useState(false);
+    // button timeout
 
-    const handleSubmit = async (e) => {
-        console.log(e)
+    const passwordMatching = (pw1, pw2) =>{
+        if (pw1 !== pw2){
+            setpasswordMatchError(true)
+        }
+    }
+
+    const runInitialChecks = async (email, password, confirmPassword) => {
+        let result = true
+        if (passwordMatching(password, confirmPassword)) {
+            setNoPasswordMatch(true)
+            result = false
+        }
+
+        return result
+    }
+
+    const addSupplier = async (email, password) => {
         try {
             const response = await fetch("/api/supplier/new", {
                 method: "POST",
                 body: JSON.stringify({
-                email: e.get('email'),
-                password: e.get('password'),
+                email: email,
+                password: password,
                 }),
             });
         
@@ -23,6 +44,20 @@ function SignUp(){
         } catch (error) {
             console.log("API RESPONSE ERROR")
             console.log(error)
+        }
+    }
+
+    const handleSubmit = async (e) => {
+        console.log(e)
+        
+        const email = e.get('email')
+        const password = e.get('password')
+        const confirmPassword = e.get('confirmPassword')
+
+        const initialChecks = await runInitialChecks()
+
+        if (initialChecks){
+            addSupplier(email, password)
         }
     }
 
@@ -45,7 +80,7 @@ function SignUp(){
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
-                                <input className="form_input" placeholder="example@business.com" required name="email"></input>   
+                                <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>   
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>
