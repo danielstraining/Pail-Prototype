@@ -9,18 +9,25 @@ function SignUp(){
     const [passwordMatchError, setpasswordMatchError] = useState(false);
     // button timeout
 
-    const passwordMatching = (pw1, pw2) =>{
+    const passwordMatching = async (pw1, pw2) =>{
         return pw1 === pw2
+    }
+
+    const supplierExists = async (email) => {
+        const data = await fetch(`/api/supplier/${email}/existing`);
+        const response = await data.json()
+        return response
     }
 
     const runInitialChecks = async (email, password, confirmPassword) => {
         let result = true
 
         // Do the passwords match?
-        if (!passwordMatching(password, confirmPassword)) {
+        const passwordMatch = await passwordMatching(password, confirmPassword)
+        if (!passwordMatch) {
             setpasswordMatchError(true)
             result = false
-        }
+        } v
 
         // Is the email already registered?
 
@@ -54,7 +61,9 @@ function SignUp(){
         const password = e.get('password')
         const confirmPassword = e.get('confirmPassword')
 
-        const initialChecks = await runInitialChecks(email, password, confirmPassword)
+        const initialChecks = false
+
+        const existingUser = await supplierExists(email)
 
         if (initialChecks){
             addSupplier(email, password)
