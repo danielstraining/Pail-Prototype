@@ -6,17 +6,22 @@ import { useState, useEffect } from "react";
 
 function SignUp(){
     const [submitTimeout, setSubmitTimeout] = useState(false)
-    const [existingEmailError, setexistingEmailError] = useState(false);
+    
     const [passwordMatchError, setpasswordMatchError] = useState(false);
+    const [existingEmailError, setexistingEmailError] = useState(false);
     const [emailFormatError, setEmailFormatError] = useState(false);
     const [passwordFormatError, setPasswordFormatError] = useState(false);
 
-    const resetStates = async() => {
-        setexistingEmailError(false)
-        setpasswordMatchError(false)
-        setEmailFormatError(false)
-        setPasswordFormatError(false)
+    const resetStates = async () => {
+        // Change this. States are purposefully not in promises. They are batched.
+        // This is not a good use of them. 
+        setpasswordMatchError(false);
+        setexistingEmailError(false);
+        setEmailFormatError(false);
+        setPasswordFormatError(false);
         console.log("ERROR STATES RESET TO FALSE")
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
+
     }
 
     const isMatchingPassword = async (pw1, pw2) =>{
@@ -26,7 +31,6 @@ function SignUp(){
     const isExistingSupplier = async (email) => {
         const data = await fetch(`/api/supplier/${email}/existing`);
         const response = await data.json()
-        console.log(`Email already exists: ${response}`)
         return response
     }
 
@@ -50,47 +54,53 @@ function SignUp(){
     // Initial Checks to determine if input values are valid
     const runInitialChecks = async (email, password, confirmPassword) => {
         console.log("Beginning 'Initial Checks'...")
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
+
         let result = true
         
         // Do the passwords match?
-        console.log("Do the passwords match?")
+        console.log("\nDo the passwords match?")
         const passwordMatch = await isMatchingPassword(password, confirmPassword)
         console.log(`Verdict = ${passwordMatch}`)
         if (!passwordMatch) {
-            setpasswordMatchError(true)
+            console.log("Setting password match error to true...");
+            setpasswordMatchError(true);
             result = false
         }
         console.log(`Running result = ${result}`)
         console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
 
         // Is the email already registered?
-        console.log("Does the email already exist?")
+        console.log("\nDoes the email already exist?")
         const supplierExists = await isExistingSupplier(email)
         console.log(`Verdict = ${supplierExists}`)
         if (supplierExists) {
-            setexistingEmailError(true)
+            console.log("Setting email error to true...");
+            setexistingEmailError(true);
             result = false
         }
         console.log(`Running result = ${result}`)
         console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
 
         // Is the email format valid?
-        console.log("Is the email format valid?")
+        console.log("\nIs the email format valid?")
         const validEmail = await isValidEmailFormat(email)
         console.log(`Verdict = ${validEmail}`)
         if (!validEmail) {
-            setEmailFormatError(true)
+            console.log("Setting valid email error to true...");
+            setEmailFormatError(true);
             result = false
         }
         console.log(`Running result = ${result}`)
         console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
 
         // Is the password format valid?
-        console.log("Is the password format valid?")
+        console.log("\nIs the password format valid?")
         const validPassword = await isValidPasswordFormat(password)
         console.log(`Verdict = ${validPassword}`)
         if (!validPassword) {
-            setPasswordFormatError(true)
+            console.log("Setting valid password error to true...");
+            setPasswordFormatError(true);
             result = false
         }
         console.log(`Running result = ${result}`)
@@ -121,7 +131,7 @@ function SignUp(){
     }
 
     const handleSubmit = async (e) => {
-        await resetStates()
+        resetStates()
         console.log(e)
 
         const email = e.get('email').toLowerCase();
@@ -134,7 +144,7 @@ function SignUp(){
 
         if (initialChecks){
             console.log("ADD SUPPLIER TRIGGERED")
-            addSupplier(email, password)
+            //addSupplier(email, password)
         }
     }
 

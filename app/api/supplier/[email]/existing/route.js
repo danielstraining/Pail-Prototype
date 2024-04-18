@@ -13,7 +13,6 @@ export const GET = async (request, { params }) => {
 
         // set to true if the supplier exists (length of the returned list is greater than 0)
         // set to false if the supplier does not exist (length of returned list is 0)
-        console.log(suppliers)
         const supplierExists = suppliers.length > 0
 
         return new Response(supplierExists, {status: 200})
