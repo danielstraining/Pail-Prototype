@@ -15,6 +15,9 @@ function SignUp(){
     const resetStates = async () => {
         // Change this. States are purposefully not in promises. They are batched.
         // This is not a good use of them. 
+        // ACTUALLY I THINK THIS IS ALL FINE
+        // I am not relying on them for the backend functionality, just displaying error messages
+        // So it should not matter that they are batched and do not update instantly
         setpasswordMatchError(false);
         setexistingEmailError(false);
         setEmailFormatError(false);
