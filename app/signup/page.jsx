@@ -5,32 +5,98 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function SignUp(){
+    const [submitTimeout, setSubmitTimeout] = useState(false)
     const [existingEmailError, setexistingEmailError] = useState(false);
     const [passwordMatchError, setpasswordMatchError] = useState(false);
-    // button timeout
+    const [emailFormatError, setEmailFormatError] = useState(false);
+    const [passwordFormatError, setPasswordFormatError] = useState(false);
 
-    const passwordMatching = async (pw1, pw2) =>{
+    const resetStates = async() => {
+        setexistingEmailError(false)
+        setpasswordMatchError(false)
+        setEmailFormatError(false)
+        setPasswordFormatError(false)
+        console.log("ERROR STATES RESET TO FALSE")
+    }
+
+    const isMatchingPassword = async (pw1, pw2) =>{
         return pw1 === pw2
     }
 
-    const supplierExists = async (email) => {
+    const isExistingSupplier = async (email) => {
         const data = await fetch(`/api/supplier/${email}/existing`);
         const response = await data.json()
+        console.log(`Email already exists: ${response}`)
         return response
     }
 
-    const runInitialChecks = async (email, password, confirmPassword) => {
-        let result = true
+    const isValidEmailFormat = async (email) => {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailPattern.test(email);
+    }
 
+    const isValidPasswordFormat = async (password) => {
+    
+        // Must contain:
+        // At least 8 Characters
+        // At least one lowercase and one uppercase character
+        // At least one number
+    
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
+        return passwordRegex.test(password);
+    }
+
+
+    // Initial Checks to determine if input values are valid
+    const runInitialChecks = async (email, password, confirmPassword) => {
+        console.log("Beginning 'Initial Checks'...")
+        let result = true
+        
         // Do the passwords match?
-        const passwordMatch = await passwordMatching(password, confirmPassword)
+        console.log("Do the passwords match?")
+        const passwordMatch = await isMatchingPassword(password, confirmPassword)
+        console.log(`Verdict = ${passwordMatch}`)
         if (!passwordMatch) {
             setpasswordMatchError(true)
             result = false
-        } v
+        }
+        console.log(`Running result = ${result}`)
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
 
         // Is the email already registered?
+        console.log("Does the email already exist?")
+        const supplierExists = await isExistingSupplier(email)
+        console.log(`Verdict = ${supplierExists}`)
+        if (supplierExists) {
+            setexistingEmailError(true)
+            result = false
+        }
+        console.log(`Running result = ${result}`)
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
 
+        // Is the email format valid?
+        console.log("Is the email format valid?")
+        const validEmail = await isValidEmailFormat(email)
+        console.log(`Verdict = ${validEmail}`)
+        if (!validEmail) {
+            setEmailFormatError(true)
+            result = false
+        }
+        console.log(`Running result = ${result}`)
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
+
+        // Is the password format valid?
+        console.log("Is the password format valid?")
+        const validPassword = await isValidPasswordFormat(password)
+        console.log(`Verdict = ${validPassword}`)
+        if (!validPassword) {
+            setPasswordFormatError(true)
+            result = false
+        }
+        console.log(`Running result = ${result}`)
+        console.log(`States\npasswordMatchError = ${passwordMatchError}\nexistingEmailError = ${existingEmailError}\nemailFormatError = ${emailFormatError}\npasswordFormatError = ${passwordFormatError}`)
+
+        console.log(`Final result = ${result}`)
         return result
     }
 
@@ -55,17 +121,19 @@ function SignUp(){
     }
 
     const handleSubmit = async (e) => {
+        await resetStates()
         console.log(e)
 
-        const email = e.get('email')
-        const password = e.get('password')
-        const confirmPassword = e.get('confirmPassword')
+        const email = e.get('email').toLowerCase();
+        const password = e.get('password');
+        const confirmPassword = e.get('confirmPassword');
 
-        const initialChecks = false
+        const initialChecks = await runInitialChecks(email, password, confirmPassword)
+        console.log(initialChecks)
 
-        const existingUser = await supplierExists(email)
 
         if (initialChecks){
+            console.log("ADD SUPPLIER TRIGGERED")
             addSupplier(email, password)
         }
     }
