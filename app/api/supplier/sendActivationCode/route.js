@@ -31,11 +31,27 @@ export const POST = async (request) => {
             from: process.env.EMAIL_USER,
             to: email,
             subject: 'Account Activation',
-            text: `Hello,\nThis is a test email.\nYour activation token is: ${token}`,
+            html:`
+                <html>
+                    <head>
+                        <style>
+                            /* Include Tailwind CSS styles here */
+                            @import url('https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css');
+                        </style>
+                    </head>
+                    <body>
+                        <div class="p-4 bg-gray-100">
+                            <h1 class="text-2xl font-bold mb-4">Account Activation</h1>
+                            <p>Hello,</p>
+                            <p>This is a test email.</p>
+                            <p>Your activation token is: ${token}</p>
+                        </div>
+                    </body>
+                </html>
+            `,
         };
 
         // Send the email
-        console.log("Sending message")
         await transporter.sendMail(messageData);
         console.log("Message sent!")
 

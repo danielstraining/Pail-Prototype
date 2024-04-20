@@ -4,8 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
+import { useRouter } from "next/navigation"
+
 
 function SignUp(){
+    const router = useRouter();
+
     const [submitting, setSubmitting] = useState(false)
     
     const [passwordMatchError, setpasswordMatchError] = useState(false);
@@ -69,6 +73,10 @@ function SignUp(){
                 password: password,
                 }),
             });
+
+            if (!response.ok){
+                throw new Error("Failed to add supplier to database.")
+            } 
                 
         // Error Handling
         } catch (error) {
@@ -85,10 +93,11 @@ function SignUp(){
                 email: email
               }),
             });
-            response = await response.json();
+
             if (!response.ok){
                 throw new Error("Something went wrong with send email api endpoint")
             } 
+
         } catch (error) {
             throw new Error(error)
         }
@@ -110,14 +119,12 @@ function SignUp(){
         const isValid = await validateInput(email, password, confirmPassword)
 
         if (isValid){ 
-            console.log("Form input is valid. If statement triggered.")
             try {
-                console.log("ADD SUPPLIER TRIGGERED");
-                const supplierResponse = await addSupplier(email, password);
-                const emailResponse = await sendActivationEmail(email);
+                await addSupplier(email, password);
+                await sendActivationEmail(email);
                 console.log("Supplier added and verification email sent successfully.");
 
-
+                router.push(`/activating/${email}`)
 
             } catch (error) {
                 console.log("Error uploading supplier details to db or sending verification email.", error)
