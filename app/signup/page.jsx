@@ -24,36 +24,32 @@ function SignUp(){
         let result = true
         
         // Do the passwords match?
-        console.log("\nDo the passwords match?")
         const passwordMatch = await isMatchingPassword(password, confirmPassword)
-        console.log(`Verdict = ${passwordMatch}`)
+        console.log(`Matching passwords? = ${passwordMatch}`)
         if (!passwordMatch) {
             setpasswordMatchError(true);
             result = false
         }
 
         // Is the email already registered?
-        console.log("\nDoes the email already exist?")
         const supplierExists = await isExistingSupplier(email)
-        console.log(`Verdict = ${supplierExists}`)
+        console.log(`Valid email? = ${!supplierExists}`)
         if (supplierExists) {
             setexistingEmailError(true);
             result = false
         }
 
         // Is the email format valid?
-        console.log("\nIs the email format valid?")
         const validEmail = await isValidEmailFormat(email)
-        console.log(`Verdict = ${validEmail}`)
+        console.log(`Valid email format? = ${validEmail}`)
         if (!validEmail) {
             setEmailFormatError(true);
             result = false
         }
 
         // Is the password format valid?
-        console.log("\nIs the password format valid?")
         const validPassword = await isValidPasswordFormat(password)
-        console.log(`Verdict = ${validPassword}`)
+        console.log(`Valid password format? = ${validPassword}`)
         if (!validPassword) {
             setPasswordFormatError(true);
             result = false
