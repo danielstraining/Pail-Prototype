@@ -4,8 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
-import { v4 } from "uuid"
-
 
 function SignUp(){
     const [submitting, setSubmitting] = useState(false)
@@ -71,33 +69,28 @@ function SignUp(){
                 password: password,
                 }),
             });
-        
-            if (response.ok) {
-                console.log("API RESPONSE OK")
-            }
-        
+                
         // Error Handling
         } catch (error) {
-            console.log("API RESPONSE ERROR")
-            console.log(error)
+            throw new Error(error)
         }
     }
 
     const sendActivationEmail = async (email) => {
         console.log("INSIDE SEND ACTIVATION EMAIL")
         try {
-            const response = await fetch("/api/supplier/sendActivationCode", {
+            let response = await fetch("/api/supplier/sendActivationCode", {
               method: "POST",
               body: JSON.stringify({
                 email: email
               }),
             });
-
-            console.log("Send activation email api response:", response)
-
+            response = await response.json();
+            if (!response.ok){
+                throw new Error("Something went wrong with send email api endpoint")
+            } 
         } catch (error) {
-            errorMessage = await error.json()
-            console.log(errorMessage)
+            throw new Error(error)
         }
     }
 
@@ -120,11 +113,14 @@ function SignUp(){
             console.log("Form input is valid. If statement triggered.")
             try {
                 console.log("ADD SUPPLIER TRIGGERED");
-                await addSupplier(email, password);
-                await sendActivationEmail(email);
+                const supplierResponse = await addSupplier(email, password);
+                const emailResponse = await sendActivationEmail(email);
                 console.log("Supplier added and verification email sent successfully.");
+
+
+
             } catch (error) {
-                console.log("Error adding uploading supplier details to db or sending verification email.", error)
+                console.log("Error uploading supplier details to db or sending verification email.", error)
             }
         }
         setSubmitting(false)
