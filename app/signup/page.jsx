@@ -94,13 +94,21 @@ function SignUp(){
 
         // Run input validation
         const isValid = await validateInput(email, password, confirmPassword)
-        console.log(isValid)
 
         // might need to add this logic into add supplier so it can be async.
         // Otherwise if might race ahead to 
         if (isValid){ 
-            console.log("ADD SUPPLIER TRIGGERED")
-            //addSupplier(email, password)
+            try {
+                console.log("ADD SUPPLIER TRIGGERED")
+                //await addSupplier(email, password)
+
+
+                console.log("Supplier added and verification email sent successfully.");
+            } catch (error) {
+                console.log("Error adding uploading supplier details to db or sending verification email.", error)
+            }
+            
+            
         }
 
         setSubmitting(false)
