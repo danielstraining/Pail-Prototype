@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 
 function SignUp(){
-    const [submitTimeout, setSubmitTimeout] = useState(false)
+    const [submitting, setSubmitting] = useState(false)
     
     const [passwordMatchError, setpasswordMatchError] = useState(false);
     const [existingEmailError, setexistingEmailError] = useState(false);
@@ -109,6 +109,9 @@ function SignUp(){
     }
 
     const handleSubmit = async (e) => {
+        // Set submitting to true to disable button so form cannot be submitted multiple times
+        setSubmitting(true)
+
         // reset all the error messages
         resetStates()
 
@@ -121,16 +124,32 @@ function SignUp(){
         const isValid = await validateInput(email, password, confirmPassword)
         console.log(isValid)
 
-        if (initialChecks){
+        // might need to add this logic into add supplier so it can be async.
+        // Otherwise if might race ahead to 
+        if (isValid){ 
             console.log("ADD SUPPLIER TRIGGERED")
             //addSupplier(email, password)
         }
+
+        setSubmitting(false)
     }
 
     return (
         <>
             <div className="h-screen w-screen flex justify-center items-center">
                 <div className="flex flex-col items-center">
+                    {passwordMatchError && (
+                        <div>Passwords do not match!</div>
+                    )}
+                    {existingEmailError && (
+                        <div>Email already exists!</div>
+                    )}
+                    {emailFormatError && (
+                        <div>Email is not correct format!</div>
+                    )}
+                    {passwordFormatError && (
+                        <div>Password is not correct format!</div>
+                    )}
                     <Image 
                         src="/assets/images/logo.svg" 
                         alt="Pail Logo" 
@@ -149,7 +168,7 @@ function SignUp(){
                                 <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>   
                             </div>
                             <div className="my-4">
-                                <h2 className="input_header">Password</h2>
+                                <h2 className="input_header">Password</h2>  
                                 <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input> 
                             </div>
                             <div className="my-4">
@@ -158,8 +177,9 @@ function SignUp(){
                             </div>
                             <button
                                 type="submit"
+                                disabled={submitting}
                                 className="black_btn my-6 w-full">
-                                Register
+                                {submitting? "Processing..." : "Register"}
                             </button> 
                         </form> 
                         <p className="w-full text-center !m-0" type="hidden">Already have an account? <Link href="/" className=" text-blue-700">Sign In</Link></p>
