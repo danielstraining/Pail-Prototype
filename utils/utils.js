@@ -1,5 +1,8 @@
+import { v4 } from "uuid"
 
+export {isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat, generateActivationToken}
 
+// Form Validation Functions
 const isMatchingPassword = async (pw1, pw2) =>{
     return pw1 === pw2
 }
@@ -24,4 +27,13 @@ const isValidPasswordFormat = async (password) => {
     return passwordRegex.test(password);
 }
 
-export {isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat}
+
+// Token Generation
+const generateActivationToken = async () => {
+    try {
+        const token = `${v4()}${v4()}`
+        return token
+    } catch (error) {
+        console.log("Failed to generate activation token.", error)
+    }
+}
