@@ -27,7 +27,7 @@ function SignUp(){
         
         // Do the passwords match?
         const passwordMatch = await isMatchingPassword(password, confirmPassword)
-        console.log(`Matching passwords? = ${passwordMatch}`)
+        //console.log(`Matching passwords? = ${passwordMatch}`)
         if (!passwordMatch) {
             setpasswordMatchError(true);
             result = false
@@ -35,7 +35,7 @@ function SignUp(){
 
         // Is the email already registered?
         const supplierExists = await isExistingSupplier(email)
-        console.log(`Valid email? = ${!supplierExists}`)
+        //console.log(`Valid email? = ${!supplierExists}`)
         if (supplierExists) {
             setexistingEmailError(true);
             result = false
@@ -43,7 +43,7 @@ function SignUp(){
 
         // Is the email format valid?
         const validEmail = await isValidEmailFormat(email)
-        console.log(`Valid email format? = ${validEmail}`)
+        //console.log(`Valid email format? = ${validEmail}`)
         if (!validEmail) {
             setEmailFormatError(true);
             result = false
@@ -51,17 +51,18 @@ function SignUp(){
 
         // Is the password format valid?
         const validPassword = await isValidPasswordFormat(password)
-        console.log(`Valid password format? = ${validPassword}`)
+        //console.log(`Valid password format? = ${validPassword}`)
         if (!validPassword) {
             setPasswordFormatError(true);
             result = false
         }
 
-        console.log(`Final result = ${result}`)
+        console.log(`Form input valid = ${result}`)
         return result
     }
 
     const addSupplier = async (email, password) => {
+        console.log("INSIDE ADD SUPPLIER")
         try {
             const response = await fetch("/api/supplier/new", {
                 method: "POST",
@@ -82,12 +83,27 @@ function SignUp(){
         }
     }
 
+    const sendActivationEmail = async (email) => {
+        console.log("INSIDE SEND ACTIVATION EMAIL")
+        try {
+            const response = await fetch("/api/supplier/sendActivationCode", {
+              method: "POST",
+              body: JSON.stringify({
+                email: email
+              }),
+            });
+
+            console.log("Send activation email api response:", response)
+
+        } catch (error) {
+            errorMessage = await error.json()
+            console.log(errorMessage)
+        }
+    }
+
     const handleSubmit = async (e) => {
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
-
-        const token = v4()
-        console.log(`uuid token = ${token}`)
 
         // reset all the error messages
         resetStates()
@@ -100,22 +116,17 @@ function SignUp(){
         // Run input validation
         const isValid = await validateInput(email, password, confirmPassword)
 
-        // might need to add this logic into add supplier so it can be async.
-        // Otherwise if might race ahead to 
         if (isValid){ 
+            console.log("Form input is valid. If statement triggered.")
             try {
-                console.log("ADD SUPPLIER TRIGGERED")
-                //await addSupplier(email, password)
-
-
+                console.log("ADD SUPPLIER TRIGGERED");
+                await addSupplier(email, password);
+                await sendActivationEmail(email);
                 console.log("Supplier added and verification email sent successfully.");
             } catch (error) {
                 console.log("Error adding uploading supplier details to db or sending verification email.", error)
             }
-            
-            
         }
-
         setSubmitting(false)
     }
 
