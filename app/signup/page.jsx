@@ -84,6 +84,9 @@ function SignUp(){
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
+        const token = 1234
+        console.log(`uuid token = ${token}`)
+
         // reset all the error messages
         resetStates()
 
