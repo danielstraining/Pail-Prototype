@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
+import { v4 } from "uuid"
+
 
 function SignUp(){
     const [submitting, setSubmitting] = useState(false)
@@ -84,7 +86,7 @@ function SignUp(){
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
-        const token = 1234
+        const token = v4()
         console.log(`uuid token = ${token}`)
 
         // reset all the error messages
