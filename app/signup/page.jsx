@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
 
 function SignUp(){
     const [submitting, setSubmitting] = useState(false)
@@ -19,32 +20,6 @@ function SignUp(){
         setPasswordFormatError(false);
     }
 
-    const isMatchingPassword = async (pw1, pw2) =>{
-        return pw1 === pw2
-    }
-
-    const isExistingSupplier = async (email) => {
-        const data = await fetch(`/api/supplier/${email}/existing`);
-        const response = await data.json()
-        return response
-    }
-
-    const isValidEmailFormat = async (email) => {
-        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailPattern.test(email);
-    }
-
-    const isValidPasswordFormat = async (password) => {
-    
-        // Must contain:
-        // min. 8 Characters, min. one lowercase and one uppercase character, min. one number
-    
-        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
-        return passwordRegex.test(password);
-    }
-
-
-    // Initial Checks to determine if input values are valid
     const validateInput = async (email, password, confirmPassword) => {
         let result = true
         
@@ -101,7 +76,8 @@ function SignUp(){
             if (response.ok) {
                 console.log("API RESPONSE OK")
             }
-
+        
+        // Error Handling
         } catch (error) {
             console.log("API RESPONSE ERROR")
             console.log(error)
