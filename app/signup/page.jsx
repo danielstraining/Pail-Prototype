@@ -136,8 +136,8 @@ function SignUp(){
 
     return (
         <>
-            <div className="h-screen w-screen flex justify-center items-center">
-                <div className="flex flex-col items-center">
+            <div className="w-full flex justify-center items-center py-20">
+                <div className="flex flex-col items-center py-20 my-20">
                     {passwordMatchError && (
                         <div>Passwords do not match!</div>
                     )}
