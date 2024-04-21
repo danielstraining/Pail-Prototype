@@ -1,21 +1,14 @@
 
 import nodemailer from 'nodemailer';
-import ActivationToken from "@models/activationToken";
 import { connectToDB } from "@utils/database";
-import { generateActivationToken } from "@utils/utils";
 
 export const POST = async (request) => {
     console.log("AT ACTIVATION EMAIL API ENDPOINT")
 
-    const { email } = await request.json();
+    const { email, token } = await request.json();
 
     try {
         await connectToDB();
-
-        // Generate an activation token and save to the database.
-        const token = await generateActivationToken()
-        const newToken = new ActivationToken({ email: email, token: token});
-        await newToken.save();
 
         // Transporter for sending the activation token
         const transporter = nodemailer.createTransport({

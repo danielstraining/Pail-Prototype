@@ -6,6 +6,7 @@ import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
 import { useRouter } from "next/navigation"
 import { hash } from "bcryptjs-react";
+import { resolve } from "styled-jsx/css";
 
 function SignUp(){
     const router = useRouter();
@@ -29,7 +30,6 @@ function SignUp(){
         
         // Do the passwords match?
         const passwordMatch = await isMatchingPassword(password, confirmPassword)
-        //console.log(`Matching passwords? = ${passwordMatch}`)
         if (!passwordMatch) {
             setpasswordMatchError(true);
             result = false
@@ -37,7 +37,6 @@ function SignUp(){
 
         // Is the email already registered?
         const supplierExists = await isExistingSupplier(email)
-        //console.log(`Valid email? = ${!supplierExists}`)
         if (supplierExists) {
             setexistingEmailError(true);
             result = false
@@ -45,7 +44,6 @@ function SignUp(){
 
         // Is the email format valid?
         const validEmail = await isValidEmailFormat(email)
-        //console.log(`Valid email format? = ${validEmail}`)
         if (!validEmail) {
             setEmailFormatError(true);
             result = false
@@ -53,7 +51,6 @@ function SignUp(){
 
         // Is the password format valid?
         const validPassword = await isValidPasswordFormat(password)
-        //console.log(`Valid password format? = ${validPassword}`)
         if (!validPassword) {
             setPasswordFormatError(true);
             result = false
@@ -69,8 +66,8 @@ function SignUp(){
             const response = await fetch("/api/supplier/new", {
                 method: "POST",
                 body: JSON.stringify({
-                email: email,
-                password: password,
+                    email: email,
+                    password: password,
                 }),
             });
 
@@ -84,13 +81,34 @@ function SignUp(){
         }
     }
 
-    const sendActivationEmail = async (email) => {
+    const addToken = async (email, token) => {
+        try {
+            const response = await fetch("/api/supplier/token/new", {
+                method: "POST",
+                body: JSON.stringify({
+                    email: email,
+                    token: token,
+                }),
+            });
+
+            if (!response.ok){
+                throw new Error("Failed to add token to database.")
+            } 
+                
+        // Error Handling
+        } catch (error) {
+            throw new Error(error)
+        }
+    }
+
+    const sendActivationEmail = async (email, token) => {
         console.log("INSIDE SEND ACTIVATION EMAIL")
         try {
-            let response = await fetch("/api/supplier/sendActivationCode", {
+            let response = await fetch("/api/supplier/token/send", {
               method: "POST",
               body: JSON.stringify({
-                email: email
+                email: email,
+                token: token,
               }),
             });
 
@@ -100,6 +118,16 @@ function SignUp(){
 
         } catch (error) {
             throw new Error(error)
+        }
+    }
+
+    const generateActivationToken = async () => {
+        try{
+            const data = await fetch("/api/supplier/token/generate");
+            const response = await data.json();
+            return response
+        } catch (error) {
+            throw new Error(error);
         }
     }
 
@@ -120,15 +148,17 @@ function SignUp(){
 
         if (isValid){ 
             try {
-                const hashedPassword = await hash(password, 12)
-                await addSupplier(email, hashedPassword);
-                await sendActivationEmail(email);
-                console.log("Supplier added and verification email sent successfully.");
+                const token = await generateActivationToken();
+                await addToken(email, token);
+                await addSupplier(email, await hash(password, 12));
+                await sendActivationEmail(email, token);
 
-                router.push(`/activating/${email}`)
+                console.log("Registration process successful");
+
+                //router.push(`/activating/${email}`)
 
             } catch (error) {
-                console.log("Error uploading supplier details to db or sending verification email.", error)
+                console.log("Error during the registration process: ", error)
             }
         }
         setSubmitting(false)
