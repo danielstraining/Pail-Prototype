@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
 import { useRouter } from "next/navigation"
-
+import { hash } from "bcryptjs-react";
 
 function SignUp(){
     const router = useRouter();
@@ -111,7 +111,7 @@ function SignUp(){
         resetStates()
 
         // Grab supplier inputs
-        const email = e.get('email').toLowerCase();
+        const email = e.get('email').toLowerCase(); // Password needs to be hashed
         const password = e.get('password');
         const confirmPassword = e.get('confirmPassword');
 
@@ -120,7 +120,8 @@ function SignUp(){
 
         if (isValid){ 
             try {
-                await addSupplier(email, password);
+                const hashedPassword = await hash(password, 12)
+                await addSupplier(email, hashedPassword);
                 await sendActivationEmail(email);
                 console.log("Supplier added and verification email sent successfully.");
 
