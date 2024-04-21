@@ -8,6 +8,7 @@ const activationTokenSchema = new Schema({
     },
     token: {
         type: String,
+        unique: true, // Token must be unique
         required: true, // Token is required
     },
     createdAt: {

@@ -37,8 +37,8 @@ export const POST = async (request) => {
                             <h1 class="text-2xl font-bold mb-4">Account Activation</h1>
                             <p>Hello,</p>
                             <p>This is a test email.</p>
-                            <p>Your activation token is: http://localhost:3000/activate/${token}</p>
-                            <p><a href="http://localhost:3000/activate/${token}">Click here!</a><p>
+                            <p>Your activation token is: http://localhost:3000/api/supplier/token/activate/${token}</p>
+                            <p><a href="http://localhost:3000/api/supplier/token/activate/${token}">Click here!</a><p>
                         </div>
                     </body>
                 </html>

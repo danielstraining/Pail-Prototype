@@ -155,7 +155,7 @@ function SignUp(){
 
                 console.log("Registration process successful");
 
-                //router.push(`/activating/${email}`)
+                router.push(`/signup/sent`)
 
             } catch (error) {
                 console.log("Error during the registration process: ", error)

@@ -1,4 +1,4 @@
-export {isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat}
+export {isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat, hoursElapsed}
 
 // Form Validation Functions
 const isMatchingPassword = async (pw1, pw2) =>{
@@ -23,4 +23,14 @@ const isValidPasswordFormat = async (password) => {
 
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/;
     return passwordRegex.test(password);
+}
+
+const hoursElapsed = async (timestamp) => {
+    const currentTime = Date.now();
+
+    const secondsDifference = Math.abs(currentTime - timestamp);
+
+    const hoursDifference = secondsDifference / (1000 * 60 * 60);
+
+    return hoursDifference;
 }
