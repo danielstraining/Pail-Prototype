@@ -9,6 +9,8 @@ export const GET = async (request, { params }) => {
         
         // Connect to the database
         await connectToDB();
+        var none = false;
+        var expired = false;
 
         // fetch an array containing all entries with the requested email
         const token = await ActivationToken.findOne({
@@ -18,9 +20,11 @@ export const GET = async (request, { params }) => {
         const tokenAge = await hoursElapsed(Date.parse(token.createdAt))
 
         if (!token) {
-            // Token does not exist
+            console.log("This token does not exist in the database");
+            none = true;
         } else if (tokenAge > 24) {
-            // Token expired
+            console.log("This token does not exist in the database")
+            expired = true;
         } else {
             const account = await Supplier.findOne({
                 email: token.email
@@ -37,7 +41,13 @@ export const GET = async (request, { params }) => {
         console.log("Failed to activate token")
         return new Response(error, {status: 500})
     } finally {
-        redirect('/signup/activated')
+        if (none) {
+            redirect('/signup/none')
+        } else if (expired) {
+            redirect('/signup/expired')
+        } else {
+            redirect('/signup/activated')  
+        }
     }
 }
 
