@@ -37,7 +37,7 @@ export const GET = async (request, { params }) => {
         console.log("Failed to activate token")
         return new Response(error, {status: 500})
     } finally {
-        redirect('/')
+        redirect('/signup/activated')
     }
 }
 
