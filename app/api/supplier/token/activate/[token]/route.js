@@ -36,6 +36,8 @@ export const GET = async (request, { params }) => {
     } catch (error) {
         console.log("Failed to activate token")
         return new Response(error, {status: 500})
+    } finally {
+        redirect('/')
     }
 }
 
