@@ -18,9 +18,9 @@ export const GET = async (request, { params }) => {
         const tokenAge = await hoursElapsed(Date.parse(token.createdAt))
 
         if (!token) {
-            // Token does not exist error
+            // Token does not exist
         } else if (tokenAge > 24) {
-            // Token older than 24 hours error
+            // Token expired
         } else {
             const account = await Supplier.findOne({
                 email: token.email

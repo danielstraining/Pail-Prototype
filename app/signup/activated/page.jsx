@@ -1,9 +1,9 @@
 "use client"
 
-const page = () => {
+const Activated = () => {
   return (
     <div>Account activated. A new market awaits... Log in</div>
   )
 }
 
-export default page
+export default Activated
