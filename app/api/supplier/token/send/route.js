@@ -23,7 +23,7 @@ export const POST = async (request) => {
         const messageData = {
             from: process.env.EMAIL_USER,
             to: email,
-            subject: 'Account Activation',
+            subject: 'Activate your Pail Account',
             html:`
                 <html>
                     <head>
@@ -35,10 +35,12 @@ export const POST = async (request) => {
                     <body>
                         <div class="p-4 bg-gray-100">
                             <h1 class="text-2xl font-bold mb-4">Account Activation</h1>
-                            <p>Hello,</p>
+                            <p>Dear Customer,</p>
                             <p>This is a test email.</p>
-                            <p>Your activation token is: http://localhost:3000/api/supplier/token/activate/${token}</p>
+                            <p>Please click the below link to activate your account. If this does not work, copy and paste the following url into your web browser: http://localhost:3000/api/supplier/token/activate/${token}</p>
                             <p><a href="http://localhost:3000/api/supplier/token/activate/${token}">Click here!</a><p>
+                            <p>Regards,</p>
+                            <p>Pail Customer Support</p>
                         </div>
                     </body>
                 </html>
