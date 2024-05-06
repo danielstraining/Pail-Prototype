@@ -9,7 +9,7 @@ export const POST = async (request) => {
 
     try {
         await connectToDB();
-        const newSupplier = new Supplier({ email: email, password: await hash(password, 12)});
+        const newSupplier = new Supplier({ email: email, password: await hash(password, Number(process.env.SALT_VERSION))});
         console.log("new supplier...")
         console.log(newSupplier)
 
@@ -18,6 +18,7 @@ export const POST = async (request) => {
         console.log('Save Successful!')
         return new Response(JSON.stringify(newSupplier), { status: 201 })
     } catch (error) {
+        console.log(error)
         return new Response(`Failed to add a new supplier to the database: ${error}`, { status: 500 });
     }
 }
