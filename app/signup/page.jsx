@@ -149,7 +149,7 @@ function SignUp() {
             try {
                 const token = await generateActivationToken();
                 await addToken(email, token);
-                await addSupplier(email, await hash(password, 12));
+                await addSupplier(email, password);
                 await sendActivationEmail(email, token);
 
                 console.log("Registration process successful");
