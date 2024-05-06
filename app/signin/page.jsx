@@ -28,14 +28,15 @@ function SignIn(){
         const email = e.get('email').toLowerCase(); // Password needs to be hashed
         const password = e.get('password');
 
-        if (isValid){ 
-            try { // Need to compare login details with database and return true (valid) or false (invalid)
-                console.log("Registration process successful");
+        console.log(`Login details:\n${email}\n${password}`)
 
-            } catch (error) {
-                console.log("Error during the registration process: ", error)
-            }
+        try { // Need to compare login details with database and return true (valid) or false (invalid)
+            console.log("Registration process successful");
+
+        } catch (error) {
+            console.log("Error during the registration process: ", error)
         }
+
         setSubmitting(false)
     }
 
@@ -68,7 +69,7 @@ function SignIn(){
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>  
-                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input> 
+                                <input className="form_input" type="password" placeholder="Password" required name="password"></input> 
                             </div>
                             <button
                                 type="submit"
