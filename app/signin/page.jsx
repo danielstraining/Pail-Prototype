@@ -9,26 +9,23 @@ import { hash } from "bcryptjs-react";
 function SignIn(){
     const router = useRouter();
 
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [submitting, setSubmitting] = useState(false)
-    
     const [invalidLoginError, setinvalidLoginError] = useState(false);
 
     const resetStates = async () => {
         setinvalidLoginError(false);
     }
 
-    const handleSignIn = async (e) => {
+    const handleSignIn = async () => {
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
         // reset all the error messages
         resetStates()
 
-        // Grab supplier inputs
-        const email = e.get('email').toLowerCase(); // Password needs to be hashed
-        const password = e.get('password');
-
-        console.log(`Login details:\n${email}\n${password}`)
+        console.log(`Login details:\n${email.toLowerCase()}\n${password}`)
 
         try { // Need to compare login details with database and return true (valid) or false (invalid)
             console.log("Registration process successful");
@@ -65,11 +62,11 @@ function SignIn(){
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
-                                <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>   
+                                <input onChange={(e) => setEmail(e.target.value)} className="form_input" type="email" placeholder="example@business.com" required name="email"></input>   
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>  
-                                <input className="form_input" type="password" placeholder="Password" required name="password"></input> 
+                                <input onChange={(e) => setPassword(e.target.value)} className="form_input" type="password" placeholder="Password" required name="password"></input> 
                             </div>
                             <button
                                 type="submit"
