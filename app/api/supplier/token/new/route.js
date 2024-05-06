@@ -15,7 +15,7 @@ export const POST = async (request) => {
         console.log('Save Successful!')
         return new Response(JSON.stringify(newToken), { status: 201 })
     } catch (error) {
-        console.log("Failed to add token to the database")
+        console.log(`Failed to add token to the database: ${error}`)
         return new Response(error, { status: 500 });
     }
 }

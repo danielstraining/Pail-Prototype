@@ -5,10 +5,13 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
 import { useRouter } from "next/navigation"
-import { hash } from "bcryptjs-react";
 
 function SignUp() {
     const router = useRouter();
+
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
 
     const [submitting, setSubmitting] = useState(false)
 
@@ -130,17 +133,12 @@ function SignUp() {
         }
     }
 
-    const handleSignUp = async (e) => {
+    const handleSignUp = async () => {
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
         // reset all the error messages
         resetStates()
-
-        // Grab supplier inputs
-        const email = e.get('email').toLowerCase(); // Password needs to be hashed
-        const password = e.get('password');
-        const confirmPassword = e.get('confirmPassword');
 
         // Run input validation
         const isValid = await validateInput(email, password, confirmPassword)
@@ -150,7 +148,7 @@ function SignUp() {
                 const token = await generateActivationToken();
                 await addToken(email, token);
                 await addSupplier(email, password);
-                await sendActivationEmail(email, token);
+                //await sendActivationEmail(email, token);
 
                 console.log("Registration process successful");
 
@@ -197,15 +195,15 @@ function SignUp() {
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
-                                <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>
+                                <input onChange={(e) => setEmail(e.target.value.toLowerCase())} className="form_input" type="email" placeholder="example@business.com" required name="email"></input>
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Password</h2>
-                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input>
+                                <input onChange={(e) => setPassword(e.target.value)} className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input>
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Confirm Password</h2>
-                                <input className="form_input" type="password" required name="confirmPassword"></input>
+                                <input onChange={(e) => setConfirmPassword(e.target.value)} className="form_input" type="password" required name="confirmPassword"></input>
                             </div>
                             <button
                                 type="submit"
