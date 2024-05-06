@@ -1,24 +1,28 @@
+import SignIn from '@app/signin/page';
 import NextAuth from 'next-auth'
-import Providers from 'next-auth/providers'
+import CredentialsProvider from 'next-auth/providers/credentials';
 
-const handler = NextAuth({
+const authOptions = {
   providers: [
-    Providers.EmailPassword({
-      // Configure the provider
-      server: {
-        // SMTP configuration for sending verification emails
-        host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER,
-          pass: process.env.EMAIL_SERVER_PASSWORD,
-        },
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {},
+
+      async authorise(credentials){
+        const user = {id: "1"}
+        return user;
       },
-      // Other provider options...
     }),
   ],
-  // Optional SQL or MongoDB database to persist users
-  database: process.env.MONGODB_URI,
-})
+  session: {
+    strategy: "jwt"
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    SignIn: "/",
+  },
+};
 
-export {handler as GET, handler as POST};
+const handler = NextAuth(authOptions);
+
+export {handler as GET, handler as POST}
