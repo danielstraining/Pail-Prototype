@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation"
-import { hash } from "bcryptjs-react";
+import { signIn } from "next-auth/react";
 
 function SignIn(){
     const router = useRouter();
@@ -18,7 +18,7 @@ function SignIn(){
         setinvalidLoginError(false);
     }
 
-    const handleSignIn = async () => {
+    const handleSignIn = async (e) => {
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
@@ -26,12 +26,22 @@ function SignIn(){
         resetStates()
 
         console.log(`Login details:\n${email.toLowerCase()}\n${password}`)
-
-        try { // Need to compare login details with database and return true (valid) or false (invalid)
-            console.log("Registration process successful");
-
+    
+        try {
+            const res = await signIn("credentials", {
+            email,
+            password,
+            redirect: false,
+            });
+    
+            if (res.error) {
+            setinvalidLoginError(true);
+            return;
+            }
+    
+            router.replace("/dashboard");
         } catch (error) {
-            console.log("Error during the registration process: ", error)
+            console.log(error);
         }
 
         setSubmitting(false)

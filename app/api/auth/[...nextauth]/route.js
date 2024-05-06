@@ -1,4 +1,3 @@
-import SignIn from '@app/signin/page';
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials';
 
@@ -7,22 +6,22 @@ const authOptions = {
     CredentialsProvider({
       name: "credentials",
       credentials: {},
-
       async authorise(credentials){
+        console.log(`Checking credentials (${credentials})`)
         const user = {id: "1"}
         return user;
       },
     }),
   ],
   session: {
-    strategy: "jwt"
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    SignIn: "/",
+    signIn: "/",
   },
 };
 
 const handler = NextAuth(authOptions);
 
-export {handler as GET, handler as POST}
+export { handler as GET, handler as POST };
