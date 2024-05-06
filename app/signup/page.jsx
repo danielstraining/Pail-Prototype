@@ -6,13 +6,12 @@ import { useState, useEffect } from "react";
 import { isMatchingPassword, isExistingSupplier, isValidEmailFormat, isValidPasswordFormat } from "@utils/utils";
 import { useRouter } from "next/navigation"
 import { hash } from "bcryptjs-react";
-import { resolve } from "styled-jsx/css";
 
-function SignUp(){
+function SignUp() {
     const router = useRouter();
 
     const [submitting, setSubmitting] = useState(false)
-    
+
     const [passwordMatchError, setpasswordMatchError] = useState(false);
     const [existingEmailError, setexistingEmailError] = useState(false);
     const [emailFormatError, setEmailFormatError] = useState(false);
@@ -27,7 +26,7 @@ function SignUp(){
 
     const validateInput = async (email, password, confirmPassword) => {
         let result = true
-        
+
         // Do the passwords match?
         const passwordMatch = await isMatchingPassword(password, confirmPassword)
         if (!passwordMatch) {
@@ -71,11 +70,11 @@ function SignUp(){
                 }),
             });
 
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error("Failed to add supplier to database.")
-            } 
-                
-        // Error Handling
+            }
+
+            // Error Handling
         } catch (error) {
             throw new Error(error)
         }
@@ -91,11 +90,11 @@ function SignUp(){
                 }),
             });
 
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error("Failed to add token to database.")
-            } 
-                
-        // Error Handling
+            }
+
+            // Error Handling
         } catch (error) {
             throw new Error(error)
         }
@@ -105,16 +104,16 @@ function SignUp(){
         console.log("INSIDE SEND ACTIVATION EMAIL")
         try {
             let response = await fetch("/api/supplier/token/send", {
-              method: "POST",
-              body: JSON.stringify({
-                email: email,
-                token: token,
-              }),
+                method: "POST",
+                body: JSON.stringify({
+                    email: email,
+                    token: token,
+                }),
             });
 
-            if (!response.ok){
+            if (!response.ok) {
                 throw new Error("Something went wrong with send email api endpoint")
-            } 
+            }
 
         } catch (error) {
             throw new Error(error)
@@ -122,7 +121,7 @@ function SignUp(){
     }
 
     const generateActivationToken = async () => {
-        try{
+        try {
             const data = await fetch("/api/supplier/token/generate");
             const response = await data.json();
             return response
@@ -131,7 +130,7 @@ function SignUp(){
         }
     }
 
-    const handleSubmit = async (e) => {
+    const handleSignUp = async (e) => {
         // Set submitting to true to disable button so form cannot be submitted multiple times
         setSubmitting(true)
 
@@ -146,7 +145,7 @@ function SignUp(){
         // Run input validation
         const isValid = await validateInput(email, password, confirmPassword)
 
-        if (isValid){ 
+        if (isValid) {
             try {
                 const token = await generateActivationToken();
                 await addToken(email, token);
@@ -180,38 +179,38 @@ function SignUp(){
                     {passwordFormatError && (
                         <div>Password is not correct format!</div>
                     )}
-                    <Image 
-                        src="/assets/images/logo.svg" 
-                        alt="Pail Logo" 
+                    <Image
+                        src="/assets/images/logo.svg"
+                        alt="Pail Logo"
                         width={100}
                         height={100}
                         className="object-contain mb-5"
                     />
                     <div className="shadow-xl p-8 bg-blue-50 rounded-xl w-[450px] font-palanquin">
                         <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
-                        <form 
+                        <form
                             className="!m-0 p-0"
-                            action={handleSubmit}
+                            action={handleSignUp}
                         >
                             <div className="my-4">
                                 <h2 className="input_header">Email</h2>
-                                <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>   
+                                <input className="form_input" type="email" placeholder="example@business.com" required name="email"></input>
                             </div>
                             <div className="my-4">
-                                <h2 className="input_header">Password</h2>  
-                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input> 
+                                <h2 className="input_header">Password</h2>
+                                <input className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input>
                             </div>
                             <div className="my-4">
                                 <h2 className="input_header">Confirm Password</h2>
-                                <input className="form_input" type="password" required name="confirmPassword"></input> 
+                                <input className="form_input" type="password" required name="confirmPassword"></input>
                             </div>
                             <button
                                 type="submit"
                                 disabled={submitting}
                                 className="black_btn my-6 w-full">
-                                {submitting? "Processing..." : "Register"}
-                            </button> 
-                        </form> 
+                                {submitting ? "Processing..." : "Register"}
+                            </button>
+                        </form>
                         <p className="w-full text-center !m-0" type="hidden">Already have an account? <Link href="/" className=" text-blue-700">Sign In</Link></p>
                     </div>
                 </div>
