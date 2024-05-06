@@ -179,13 +179,16 @@ function SignUp() {
                     {passwordFormatError && (
                         <div>Password is not correct format!</div>
                     )}
-                    <Image
-                        src="/assets/images/logo.svg"
-                        alt="Pail Logo"
-                        width={100}
-                        height={100}
-                        className="object-contain mb-5"
-                    />
+                    <Link
+                    href={"/"}>
+                        <Image
+                            src="/assets/images/logo.svg"
+                            alt="Pail Logo"
+                            width={100}
+                            height={100}
+                            className="object-contain mb-5"
+                        />
+                    </Link>
                     <div className="shadow-xl p-8 bg-blue-50 rounded-xl w-[450px] font-palanquin">
                         <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
                         <form
