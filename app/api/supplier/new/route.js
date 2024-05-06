@@ -1,19 +1,15 @@
 import { connectToDB } from "@utils/database";
 import Supplier from "@models/supplier";
-import bcryptjs from "bcryptjs-react";
+import { hash } from "bcryptjs";
 
 export const POST = async (request) => {
     console.log("--- BEGINNING OF POST REQUEST ---")
     const { email, password} = await request.json();
     console.log(email, password)
 
-    // const salt = await bcryptjs.genSalt(12);
-    // const hashedPassword = await bcryptjs.hash(password, salt);
-    // console.log(hashedPassword)
-
     try {
         await connectToDB();
-        const newSupplier = new Supplier({ email: email, password: password});
+        const newSupplier = new Supplier({ email: email, password: await hash(password, 12)});
         console.log("new supplier...")
         console.log(newSupplier)
 
