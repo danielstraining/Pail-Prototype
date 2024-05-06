@@ -211,7 +211,7 @@ function SignUp() {
                                 {submitting ? "Processing..." : "Register"}
                             </button>
                         </form>
-                        <p className="w-full text-center !m-0" type="hidden">Already have an account? <Link href="/" className=" text-blue-700">Sign In</Link></p>
+                        <p className="w-full text-center !m-0" type="hidden">Already have an account? <Link href="/signin" className=" text-blue-700">Sign In</Link></p>
                     </div>
                 </div>
             </div>

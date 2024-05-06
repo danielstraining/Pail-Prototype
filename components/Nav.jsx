@@ -7,9 +7,6 @@ import { useRouter } from "next/navigation";
 const Nav = () => {
     const router = useRouter();
 
-    const handleSignUp = () => {
-        router.push("/signup");
-    }
 
     return (
         <nav className="flex justify-between items-center w-full px-28 py-5">
@@ -26,13 +23,13 @@ const Nav = () => {
             <div className="flex justify-between w-96">
                 <button
                     type="button"
-                    onClick = {handleSignUp}
+                    onClick = {() => {router.push("/signup")}}
                     className="black_btn">
                     Sign Up
                 </button>
                 <button
                     type="button"
-                    onClick = {() => {}}
+                    onClick = {() => {router.push("/signin")}}
                     className="black_btn">
                     Sign In
                 </button>

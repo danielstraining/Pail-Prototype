@@ -54,7 +54,7 @@ function SignIn(){
                         className="object-contain mb-5"
                     />
                     <div className="shadow-xl p-8 bg-blue-50 rounded-xl w-[450px] font-palanquin">
-                        <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
+                        <h1 className="text-3xl text-center mt-1 mb-3">Sign In</h1>
                         <form 
                             className="!m-0 p-0"
                             action={handleSignIn}
@@ -74,7 +74,7 @@ function SignIn(){
                                 {submitting? "Signing In..." : "Sign In"}
                             </button> 
                         </form> 
-                        <p className="w-full text-center !m-0" type="hidden">Don't have an account? <Link href="/" className=" text-blue-700">Sign Up</Link></p>
+                        <p className="w-full text-center !m-0" type="hidden">Don't have an account? <Link href="/signup" className=" text-blue-700">Sign Up</Link></p>
                     </div>
                 </div>
             </div>
