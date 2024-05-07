@@ -1,7 +1,7 @@
 import NextAuth from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials';
 
-const handler = NextAuth({
+export const authOptions = {
   providers: [
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -16,7 +16,7 @@ const handler = NextAuth({
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: "1", name: "J Smith", email: "jsmith@example.com" }
+        const user = { id: "1", name: "J Smith", email: credentials.email }
 
         console.log(`Credentials = ${credentials}`)
         console.log(credentials)
@@ -33,6 +33,15 @@ const handler = NextAuth({
       }
     })
   ],
-})
+  session: {
+    strategy: "jwt",
+  },
+  secret: process.env.NEXTAUTH_SECRET,
+  pages: {
+    signIn: "/",
+  },
+}
+
+const handler = NextAuth(authOptions);
 
 export {handler as GET, handler as POST};
