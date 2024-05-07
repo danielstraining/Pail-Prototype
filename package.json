@@ -13,6 +13,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "bcryptjs-react": "^2.4.6",
+    "lucide-react": "^0.378.0",
     "mongodb": "^6.5.0",
     "mongoose": "^8.3.0",
     "next": "14.1.4",
