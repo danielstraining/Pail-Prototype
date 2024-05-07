@@ -18,7 +18,6 @@ export const authOptions = {
         // Add logic here to look up the user from the credentials supplied
         const user = { id: "1", name: "J Smith", email: credentials.email }
 
-        console.log(`Credentials = ${credentials}`)
         console.log(credentials)
   
         if (user) {
@@ -38,7 +37,7 @@ export const authOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: "/",
+    signIn: "/signin",
   },
 }
 

@@ -42,9 +42,9 @@ function SigninForm(){
             router.replace("/dashboard");
         } catch (error) {
             console.log(error);
+        } finally {
+           setSubmitting(false) 
         }
-
-        setSubmitting(false)
     }
 
     return (

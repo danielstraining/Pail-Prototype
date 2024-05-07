@@ -1,7 +1,6 @@
 "use client"
 
 import '@styles/globals.css'
-import Nav from '@components/Nav'
 import Image from "next/image";
 import { useRouter } from "next/navigation"
 

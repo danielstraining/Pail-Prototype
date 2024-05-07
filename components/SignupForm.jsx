@@ -156,6 +156,8 @@ function SignupForm() {
 
             } catch (error) {
                 console.log("Error during the registration process: ", error)
+            } finally {
+                setSubmitting(false)
             }
         }
         setSubmitting(false)
