@@ -27,7 +27,7 @@ export function Dashboard() {
     const [currentPage, setCurrentPage] = useState('overview')
     
     return (
-        <div className="flex">
+        <div className="flex justify-between">
             <SideBar>
                 <SideBarItem icon={<LayoutDashboard size={20}/>} text="Overview" onClickFunction={() => {setCurrentPage('overview')}}/>
                 <SideBarItem icon={<ScanBarcode size={20}/>} text="Products" onClickFunction={() => {setCurrentPage('products')}}/>

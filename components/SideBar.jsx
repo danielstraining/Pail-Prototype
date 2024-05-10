@@ -6,7 +6,7 @@ import Link from "next/link"
 export const SideBar = ({ children }) => {
 
     return (
-        <aside className="h-screen w-fit">
+        <aside className="h-screen w-fit sticky top-0 left-0 z-30">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
                 <div className="p-4 pb-2 my-3 flex justify-center items-center">
                     <Link href="/dashboard">
