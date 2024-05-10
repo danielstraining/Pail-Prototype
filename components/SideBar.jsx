@@ -25,7 +25,7 @@ export const SideBar = ({ children }) => {
     )
 }
 
-export const SideBarItem = ({ icon, text, active, alert }) => {
+export const SideBarItem = ({ icon, text, active, alert, onClickFunction }) => {
   
     return (
         <li
@@ -42,6 +42,7 @@ export const SideBarItem = ({ icon, text, active, alert }) => {
         >
             <button
                 className="flex items-center"
+                onClick={onClickFunction}
             >
                 {icon}
                 <span className="px-7 transition-all">
