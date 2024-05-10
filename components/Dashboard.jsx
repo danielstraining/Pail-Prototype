@@ -1,9 +1,12 @@
 "use client"
 
+import { useState, useEffect } from "react";
 import { SideBar, SideBarItem } from "./SideBar"
 import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, LogOut } from "lucide-react";
 
 export default async function Dashboard() {
+    
+    const [currentPage, setCurrentPage] = useState('overview')
     
     return (
       <SideBar>

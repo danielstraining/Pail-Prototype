@@ -40,29 +40,20 @@ export const SideBarItem = ({ icon, text, active, alert }) => {
                 }
             `}
         >
-            {icon}
-            <span className="w-40 pl-7 transition-all">
-                {text}
-            </span>
-            {alert && (
-                <div
-                className="absolute right-4 w-2 h-2 rounded bg-indigo-400"
-                />
-            )}
+            <button
+                className="flex items-center"
+            >
+                {icon}
+                <span className="px-7 transition-all">
+                    {text}
+                </span>
+                {alert && (
+                    <div
+                    className="absolute right-4 w-2 h-2 rounded bg-indigo-400"
+                    />
+                )}  
+            </button>
+            
         </li>
-    )
-}
-
-export const SignoutItem = ({ icon, text, active, alert }) => {
-    return (
-        <button>
-            <SideBarItem 
-            icon={icon} 
-            text={text} 
-            active={active} 
-            alert={alert}
-            /> 
-        </button>
-        
     )
 }
