@@ -2,10 +2,27 @@
 
 import { useState, useEffect } from "react";
 import { SideBar, SideBarItem } from "./SideBar"
-import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, LogOut } from "lucide-react";
+import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, LogOut, Paintbrush, CircleDollarSign } from "lucide-react";
 import { signOut } from "next-auth/react";
+import { AccountActions } from "./AcountActions";
 
-export default function Dashboard() {
+
+const accountActionsData = [
+    {
+        title: 'Choose a company name',
+        description: 'Choose a company name that will represent your business on Pail',
+        icon: <Paintbrush size={20}/>,
+        link: () => {},
+    }, 
+    {
+        title: 'Add payment information',
+        description: 'Register your payment information to be able to list products on Pail',
+        icon: <CircleDollarSign size={20}/>,
+        link: () => {},
+    }, 
+]
+
+export function Dashboard() {
     
     const [currentPage, setCurrentPage] = useState('overview')
     
@@ -22,8 +39,28 @@ export default function Dashboard() {
                 <SideBarItem icon={<LifeBuoy size={20}/>} text="Help" onClickFunction={() => {setCurrentPage('help')}}/>
                 <SideBarItem icon={<LogOut size={20}/>} text="Sign Out" onClickFunction={signOut}/>
             </SideBar>
-            <div>{currentPage}</div>
+            <div className=" w-full">
+                <DashBoardContent currentPage={currentPage}/>
+            </div>
         </div>
       
     )
-  }
+}
+
+export function DashBoardContent( {currentPage} ){
+
+    return(
+        <div className="m-8">{currentPage}
+            {currentPage === "overview" && // Overview
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Welcome to Pail</h1>
+                    <h2 className="text-2xl font-palanquin my-10">Your business at a glance</h2>
+                    <div className="my-10">Overview</div>
+                    <div className="my-10">Sales Summary</div>
+                    <AccountActions></AccountActions>
+                </div>
+            }
+
+        </div>
+    )
+}
