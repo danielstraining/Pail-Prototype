@@ -9,7 +9,7 @@ export const SideBar = ({ children }) => {
     return (
         <aside className="h-screen w-fit">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-                <div className="p-4 pb-2 my-2 flex justify-center items-center">
+                <div className="p-4 pb-2 my-3 flex justify-center items-center">
                     <Link href="/dashboard">
                         <Image
                             src="/assets/images/logo.svg"

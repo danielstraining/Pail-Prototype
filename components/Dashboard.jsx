@@ -10,7 +10,7 @@ export default function Dashboard() {
     const [currentPage, setCurrentPage] = useState('overview')
     
     return (
-        <>
+        <div className="flex">
             <SideBar>
                 <SideBarItem icon={<LayoutDashboard size={20}/>} text="Overview" onClickFunction={() => {setCurrentPage('overview')}}/>
                 <SideBarItem icon={<ScanBarcode size={20}/>} text="Products" onClickFunction={() => {setCurrentPage('products')}}/>
@@ -23,7 +23,7 @@ export default function Dashboard() {
                 <SideBarItem icon={<LogOut size={20}/>} text="Sign Out" onClickFunction={signOut}/>
             </SideBar>
             <div>{currentPage}</div>
-        </>
+        </div>
       
     )
   }
