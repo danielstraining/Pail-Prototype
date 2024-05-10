@@ -6,22 +6,6 @@ import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, L
 import { signOut } from "next-auth/react";
 import { AccountActions } from "./AcountActions";
 
-
-const accountActionsData = [
-    {
-        title: 'Choose a company name',
-        description: 'Choose a company name that will represent your business on Pail',
-        icon: <Paintbrush size={20}/>,
-        link: () => {},
-    }, 
-    {
-        title: 'Add payment information',
-        description: 'Register your payment information to be able to list products on Pail',
-        icon: <CircleDollarSign size={20}/>,
-        link: () => {},
-    }, 
-]
-
 export function Dashboard() {
     
     const [currentPage, setCurrentPage] = useState('overview')
@@ -50,7 +34,8 @@ export function Dashboard() {
 export function DashBoardContent( {currentPage} ){
 
     return(
-        <div className="m-8">{currentPage}
+        <div className="m-8">
+
             {currentPage === "overview" && // Overview
                 <div className="w-full">
                     <h1 className="text-7xl font-palanquin my-10">Welcome to Pail</h1>
@@ -67,6 +52,71 @@ export function DashBoardContent( {currentPage} ){
                 </div>
             }
 
+            {currentPage === "products" && // Products
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Products</h1>
+                    <h3 className="text-2xl font-palanquin my-10">List, remove and edit your products</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
+
+            {currentPage === "orders" && // Orders
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Orders</h1>
+                    <h3 className="text-2xl font-palanquin my-10">Keep track of your orders</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
+
+            {currentPage === "billings" && // Billings
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Billings</h1>
+                    <h3 className="text-2xl font-palanquin my-10">Keep track of your inflows</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
+
+            {currentPage === "statistics" && // Statistics
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Statistics</h1>
+                    <h3 className="text-2xl font-palanquin my-10">See your business in numbers</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
+
+            {currentPage === "settings" && // Settings
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Settings</h1>
+                    <h3 className="text-2xl font-palanquin my-10">Customise your Pail experience</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
+
+            {currentPage === "help" && // Help
+                <div className="w-full">
+                    <h1 className="text-7xl font-palanquin my-10">Help</h1>
+                    <h3 className="text-2xl font-palanquin my-10">Stuck? We're here to help</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                </div>
+            }
         </div>
     )
 }
