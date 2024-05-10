@@ -1,23 +1,39 @@
 "use client"
 import { useState } from "react"
 
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { ChevronLeft, ChevronRight, CreditCard, ALargeSmall, Target, Star } from "lucide-react"
 
 export function AccountActions( {children} ){
 
     return (
-        <section className="w-full flex justify-center my-10 bg-slate-50">
-            <div className="w-full bg-blue-300">
+        <section className="w-full flex justify-center my-10">
+            <div className="w-full">
                 <Carousel>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
-                    <AccountActionsCard/>
+                    <AccountActionsCard 
+                        title="Give your business a name" 
+                        description="Make your business stand out with a unique name to make your brand stand out"
+                        icon={<ALargeSmall size={60}/>}
+                        onClickFunction={() => {}}
+                    
+                    />
+                    <AccountActionsCard
+                        title="Add payment information" 
+                        description="Register your payment information to be able to list products on Pail"
+                        icon={<CreditCard size={60}/>}
+                        onClickFunction={() => {}}
+                    />
+                    <AccountActionsCard
+                        title="List your first product" 
+                        description="Get started on your Pail journey by listing your first product"
+                        icon={<Target size={60}/>}
+                        onClickFunction={() => {}}
+                    />
+                    <AccountActionsCard
+                        title="Rate the app" 
+                        description="We appreciate your feedback to improve the Pail experience"
+                        icon={<Star size={60}/>}
+                        onClickFunction={() => {}}
+                    />
                 </Carousel>
             </div>
         </section>
@@ -31,16 +47,16 @@ export function Carousel( {children} ){
     const prev = () => {setSlide((slide) => (slide === 0 ? children.length - 1 : slide - 1))}
 
     return(
-        <div className="relative w-full h-52 overflow-hidden bg-red-300">
-            <div 
-                className="absolute left-10 top-0 bottom-0 flex overflow-x-auto items-center transition-transform ease-out duration-500"
+        <div className="relative w-full h-96 overflow-hidden">
+            <ul 
+                className="absolute left-10 top-0 bottom-0 flex overflow-x-auto items-center transition-transform ease-out duration-500 z-10"
                 style={{ transform: `translateX(-${slide * 100/children.length}%)` }}
             >
                 {children}
-            </div>
+            </ul>
             <div className="absolute left-0 right-0 top-0 h-full flex items-center justify-between p-4">
                 {slide !== 0 ?
-                <button onClick={prev} className="p-1 rounded-full shadow bg-white/80 text-black hover:bg-white">
+                <button onClick={prev} className="p-1 rounded-full shadow bg-white/80 text-black hover:bg-white z-20">
                     <ChevronLeft size={20}/>
                 </button>
                 :
@@ -49,7 +65,7 @@ export function Carousel( {children} ){
                 </button>
                 }
                 {slide !== children.length-1 ?
-                <button onClick={next} className="p-1 rounded-full shadow bg-white/80 text-black hover:bg-white">
+                <button onClick={next} className="p-1 rounded-full shadow bg-white/80 text-black hover:bg-white z-20">
                     <ChevronRight size={20}/>
                 </button>
                 :
@@ -63,8 +79,20 @@ export function Carousel( {children} ){
     )
 }
 
-export function AccountActionsCard(){
+export function AccountActionsCard({ title, description, icon, onClickFunction }){
     return (
-        <div className=" w-52 h-36 my-5 bg-blue-200 mr-10"></div>
+        <li className="w-72 p-5 my-5 bg-blue-50 rounded-xl font-palanquin mr-10">
+            <div className="flex justify-between items-center mb-5 pr-3">
+                <h1 className="text-2xl">{title}</h1>  
+                {icon}
+            </div>
+            <p className="mb-5 text-xl">{description}</p>
+            <button
+                type="button"
+                onClick = {onClickFunction}
+                className="black_btn cursor-pointer">
+                Complete now
+            </button> 
+        </li>
     )
 }
