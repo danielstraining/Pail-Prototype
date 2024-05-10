@@ -1,5 +1,6 @@
 "use client"
 
+import { signOut } from "next-auth/react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -8,7 +9,7 @@ export const SideBar = ({ children }) => {
     return (
         <aside className="h-screen w-fit">
             <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-                <div className="p-4 pb-2 mb-2 flex justify-center items-center">
+                <div className="p-4 pb-2 my-2 flex justify-center items-center">
                     <Link href="/dashboard">
                         <Image
                             src="/assets/images/logo.svg"
@@ -29,7 +30,7 @@ export const SideBarItem = ({ icon, text, active, alert }) => {
     return (
         <li
             className={`
-                relative flex justify-between items-center py-2 px-3 my-2
+                relative flex items-center py-2 px-3 my-3
                 font-medium rounded-md cursor-pointer
                 transition-colors group
                 ${
@@ -40,14 +41,28 @@ export const SideBarItem = ({ icon, text, active, alert }) => {
             `}
         >
             {icon}
-            <span className="overflow-hidden px-3 transition-all">
+            <span className="w-40 pl-7 transition-all">
                 {text}
             </span>
             {alert && (
                 <div
-                className="w-2 h-2 rounded bg-indigo-400"
+                className="absolute right-4 w-2 h-2 rounded bg-indigo-400"
                 />
             )}
         </li>
+    )
+}
+
+export const SignoutItem = ({ icon, text, active, alert }) => {
+    return (
+        <button>
+            <SideBarItem 
+            icon={icon} 
+            text={text} 
+            active={active} 
+            alert={alert}
+            /> 
+        </button>
+        
     )
 }
