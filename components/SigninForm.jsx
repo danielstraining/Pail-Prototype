@@ -49,8 +49,8 @@ function SigninForm(){
 
     return (
         <>
-            <div className="w-full flex justify-center items-center py-20">
-                <div className="flex flex-col items-center py-20 my-20">
+            <div className="w-full h-screen flex justify-center items-center">
+                <div className="flex flex-col items-center">
                     {invalidLoginError && (
                         <div>Invalid Login details</div>
                     )}

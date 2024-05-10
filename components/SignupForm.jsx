@@ -165,8 +165,8 @@ function SignupForm() {
 
     return (
         <>
-            <div className="w-full flex justify-center items-center py-20">
-                <div className="flex flex-col items-center py-20 my-20">
+            <div className="w-full h-screen flex justify-center items-center py-20">
+                <div className="flex flex-col items-center">
                     {passwordMatchError && (
                         <div>Passwords do not match!</div>
                     )}
