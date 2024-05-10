@@ -54,9 +54,15 @@ export function DashBoardContent( {currentPage} ){
             {currentPage === "overview" && // Overview
                 <div className="w-full">
                     <h1 className="text-7xl font-palanquin my-10">Welcome to Pail</h1>
-                    <h2 className="text-2xl font-palanquin my-10">Your business at a glance</h2>
-                    <div className="my-10">Overview</div>
-                    <div className="my-10">Sales Summary</div>
+                    <h3 className="text-2xl font-palanquin my-10">Your business at a glance</h3>
+                    <div>
+                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                    </div>
+                    <div>
+                        <h2 className="text-3xl font-palanquin my-10">Sales Summary</h2>
+                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+                    </div>
                     <AccountActions></AccountActions>
                 </div>
             }

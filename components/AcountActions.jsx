@@ -6,7 +6,8 @@ import { ChevronLeft, ChevronRight, CreditCard, ALargeSmall, Target, Star } from
 export function AccountActions( {children} ){
 
     return (
-        <section className="w-full flex justify-center my-10">
+        <section className="w-full my-10">
+            <h2 className="text-3xl font-palanquin my-10">Account Actions</h2>
             <div className="w-full">
                 <Carousel>
                     <AccountActionsCard 
