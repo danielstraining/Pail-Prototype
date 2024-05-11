@@ -87,7 +87,7 @@ export function AccountActionsCard({ title, description, icon, onClickFunction }
                 <h1 className="text-2xl">{title}</h1>  
                 {icon}
             </div>
-            <p className="mb-5 text-xl">{description}</p>
+            <p className="mb-5 text-xl text-gray-600">{description}</p>
             <button
                 type="button"
                 onClick = {onClickFunction}

@@ -24,7 +24,7 @@ export const SideBar = ({ children }) => {
     )
 }
 
-export const SideBarItem = ({ icon, text, active, alert, onClickFunction }) => {
+export const SideBarItem = ({ icon, text, active, alert, selected, onClickFunction }) => {
   
     return (
         <li

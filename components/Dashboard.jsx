@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from "react";
 import { SideBar, SideBarItem } from "./SideBar"
-import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, LogOut, Paintbrush, CircleDollarSign } from "lucide-react";
+import { LayoutDashboard, LifeBuoy, Settings, ScanBarcode, Receipt, BarChart3, LogOut, Plus, Paintbrush, CircleDollarSign } from "lucide-react";
 import { signOut } from "next-auth/react";
 import { AccountActions } from "./AcountActions";
+import Image from "next/image";
 
 export function Dashboard() {
     
@@ -13,7 +14,7 @@ export function Dashboard() {
     return (
         <div className="flex justify-between">
             <SideBar>
-                <SideBarItem icon={<LayoutDashboard size={20}/>} text="Overview" onClickFunction={() => {setCurrentPage('overview')}}/>
+                <SideBarItem icon={<LayoutDashboard size={20}/>} text="Overview" selected={currentPage==='overview'} onClickFunction={() => {setCurrentPage('overview')}}/>
                 <SideBarItem icon={<ScanBarcode size={20}/>} text="Products" onClickFunction={() => {setCurrentPage('products')}}/>
                 <SideBarItem icon={<LayoutDashboard size={20}/>} text="Orders" onClickFunction={() => {setCurrentPage('orders')}} alert/>
                 <SideBarItem icon={<Receipt size={20}/>} text="Billings" onClickFunction={() => {setCurrentPage('billings')}} alert/>
@@ -33,19 +34,21 @@ export function Dashboard() {
 
 export function DashBoardContent( {currentPage} ){
 
+    const [listings, setListings] = useState([])
+
     return(
-        <div className="m-8">
+        <div className="m-8 font-palanquin">
 
             {currentPage === "overview" && // Overview
                 <div className="w-full">
-                    <h1 className="text-7xl font-palanquin my-10">Welcome to Pail</h1>
-                    <h3 className="text-2xl font-palanquin my-10">Your business at a glance</h3>
+                    <h1 className="text-7xl my-10">Welcome to Pail</h1>
+                    <h3 className="text-2xl my-10">Your business at a glance</h3>
                     <div>
-                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
+                       <h2 className="text-3xl my-10">Overview</h2>
                         <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
                     </div>
                     <div>
-                        <h2 className="text-3xl font-palanquin my-10">Sales Summary</h2>
+                        <h2 className="text-3xl my-10">Sales Summary</h2>
                         <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
                     </div>
                     <AccountActions></AccountActions>
@@ -54,11 +57,31 @@ export function DashBoardContent( {currentPage} ){
 
             {currentPage === "products" && // Products
                 <div className="w-full">
-                    <h1 className="text-7xl font-palanquin my-10">Products</h1>
-                    <h3 className="text-2xl font-palanquin my-10">List, remove and edit your products</h3>
+                    <h1 className="text-7xl my-10">Products</h1>
+                    <h3 className="text-2xl my-10">List, remove and edit your products</h3>
                     <div>
-                       <h2 className="text-3xl font-palanquin my-10">Overview</h2>
-                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div> 
+                        <h2 className="text-3xl my-10">Your listings</h2>
+                        <div className="w-full flex justify-center bg-blue-50 rounded-xl my-10 p-5">
+                            {listings.length === 0 &&
+                                <div className="relative flex flex-col w-full items-center my-10">
+                                    <h1 className="text-3xl mb-10">You have no products listed yet!</h1>
+                                    <p className="text-xl text-gray-600 mb-10">Start now by listing your first item...</p>
+                                    <button
+                                        type="button"
+                                        onClick = {() => {}}
+                                        className="black_btn z-10">
+                                        <Plus size={50}/>
+                                    </button> 
+                                    <Image 
+                                    src="/assets/images/splash2.svg" 
+                                    alt="Splash graphic" 
+                                    width={0}
+                                    height={0}
+                                    className="absolute bottom-0 w-2/3"/>
+                                </div>
+                            }
+                        </div> 
+                        <AccountActions></AccountActions>
                     </div>
                 </div>
             }
