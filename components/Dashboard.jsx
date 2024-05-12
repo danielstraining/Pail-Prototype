@@ -25,14 +25,14 @@ export function Dashboard() {
                 <SideBarItem icon={<LogOut size={20}/>} text="Sign Out" onClickFunction={signOut}/>
             </SideBar>
             <div className=" w-full">
-                <DashBoardContent currentPage={currentPage}/>
+                <DashBoardContent currentPage={currentPage} setPage={setCurrentPage}/>
             </div>
         </div>
       
     )
 }
 
-export function DashBoardContent( {currentPage} ){
+export function DashBoardContent( {currentPage, setPage} ){
 
     const [listings, setListings] = useState([])
 
@@ -68,7 +68,7 @@ export function DashBoardContent( {currentPage} ){
                                     <p className="text-xl text-gray-600 mb-10">Start now by listing your first item...</p>
                                     <button
                                         type="button"
-                                        onClick = {() => {}}
+                                        onClick = {() => {setPage('createListing')}}
                                         className="black_btn z-10">
                                         <Plus size={50}/>
                                     </button> 
@@ -83,6 +83,13 @@ export function DashBoardContent( {currentPage} ){
                         </div> 
                         <AccountActions></AccountActions>
                     </div>
+                </div>
+            }
+
+            {currentPage === "createListing" && // List item
+                <div className="w-full">
+                    <h1 className="text-7xl my-10">Create listing</h1>
+                    <h3 className="text-2xl my-10">Add a product to your store. Add pictures, tags and define pools</h3>
                 </div>
             }
 
