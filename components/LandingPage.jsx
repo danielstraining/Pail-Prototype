@@ -95,7 +95,7 @@ const LandingPage = () => {
                             alt="Splash graphic" 
                             width={0}
                             height={0}
-                            className="absolute bottom-0 left-0 right-0 ml-auto mr-auto w-[800px]"/>
+                            className="absolute top-0 left-0 right-0 ml-auto mr-auto w-[800px]"/>
                     </div>
                 </div>
             </section>

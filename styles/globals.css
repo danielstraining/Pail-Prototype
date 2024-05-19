@@ -11,7 +11,7 @@
   }
 
 .form_input {
-  @apply w-full p-2 mt-2 rounded-lg outline-none shadow-sm;
+  @apply w-full p-2 mt-2 rounded-lg outline-none drop-shadow-lg;
 }
 
 .input_header {

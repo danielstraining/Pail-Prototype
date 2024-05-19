@@ -43,70 +43,68 @@ export function DashBoardContent({ currentPage, setPage }) {
 
             {currentPage === "Home" && // Overview
                 <>
-                    <h1 className="text-7xl my-10">Welcome to Pail</h1>
-                    <h3 className="text-2xl my-10">Your business at a glance</h3>
-                    <HomeOverview/>
-                    <SalesSummary/>
+                    <h1 className="text-7xl my-10 text-pail_green">Welcome to Pail</h1>
+                    <h3 className="text-2xl my-10 text-pail_green">Your business at a glance</h3>
+                    <HomeOverview />
+                    <SalesSummary />
                     <AccountActions />
                 </>
             }
 
             {currentPage === "products" && // Products
                 <>
-                    <h1 className="text-7xl my-10">Products</h1>
-                    <h3 className="text-2xl my-10">List, remove and edit your products</h3>
-                    <Listings setPage={setPage}/>
+                    <h1 className="text-7xl my-10 text-pail_green">Products</h1>
+                    <h3 className="text-2xl my-10 text-pail_green">List, remove and edit your products</h3>
+                    <Listings setPage={setPage} />
                     <AccountActions />
                 </>
             }
 
             {currentPage === "createListing" && // List item
-                <CreateListing/>
+                <>
+                    <h1 className="text-7xl my-10 text-pail_green">Create Listing</h1>
+                    <h3 className="text-2xl my-10 text-pail_green">Add a product to your store. Add pictures, tags and define pools</h3>
+                    <CreateListing />
+                </>
             }
 
             {currentPage === "orders" && // Orders
                 <>
-                    <h1 className="text-7xl font-palanquin my-10">Orders</h1>
-                    <h3 className="text-2xl font-palanquin my-10">Keep track of your orders</h3>
-                    <OrdersOverview/>
+                    <h1 className="text-7xl font-palanquin my-10 text-pail_green">Orders</h1>
+                    <h3 className="text-2xl font-palanquin my-10 text-pail_green">Keep track of your orders</h3>
+                    <OrdersOverview />
                 </>
             }
 
             {currentPage === "billings" && // Billings
                 <>
-                    <h1 className="text-7xl font-palanquin my-10">Billings</h1>
-                    <h3 className="text-2xl font-palanquin my-10">Keep track of your inflows</h3>
-                    <BillingsOverview/>
+                    <h1 className="text-7xl font-palanquin my-10 text-pail_green">Billings</h1>
+                    <h3 className="text-2xl font-palanquin my-10 text-pail_green">Keep track of your inflows</h3>
+                    <BillingsOverview />
                 </>
             }
 
             {currentPage === "statistics" && // Statistics
                 <>
-                    <h1 className="text-7xl font-palanquin my-10">Statistics</h1>
-                    <h3 className="text-2xl font-palanquin my-10">See your business in numbers</h3>
-                    <StatisticsOverview/>
+                    <h1 className="text-7xl font-palanquin my-10 text-pail_green">Statistics</h1>
+                    <h3 className="text-2xl font-palanquin my-10 text-pail_green">See your business in numbers</h3>
+                    <StatisticsOverview />
                 </>
             }
 
             {currentPage === "settings" && // Settings
                 <div className="w-full">
-                    <h1 className="text-7xl font-palanquin my-10">Settings</h1>
-                    <h3 className="text-2xl font-palanquin my-10">Customise your Pail experience</h3>
-                    <div>
-                        <h2 className="text-3xl font-palanquin my-10">Overview</h2>
-                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
-                    </div>
+                    <h1 className="text-7xl font-palanquin my-10 text-pail_green">Settings</h1>
+                    <h3 className="text-2xl font-palanquin my-10 text-pail_green">Customise your Pail experience</h3>
+                    <StatisticsOverview />
                 </div>
             }
 
             {currentPage === "help" && // Help
                 <div className="w-full">
-                    <h1 className="text-7xl font-palanquin my-10">Help</h1>
-                    <h3 className="text-2xl font-palanquin my-10">Stuck? We're here to help</h3>
-                    <div>
-                        <h2 className="text-3xl font-palanquin my-10">Overview</h2>
-                        <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
-                    </div>
+                    <h1 className="text-7xl font-palanquin my-10 text-pail_green">Help</h1>
+                    <h3 className="text-2xl font-palanquin my-10 text-pail_green">Stuck? We're here to help</h3>
+                    <StatisticsOverview />
                 </div>
             }
         </div>

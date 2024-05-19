@@ -7,7 +7,7 @@ export function AccountActions( {children} ){
 
     return (
         <section className="w-full my-16">
-            <h2 className="text-3xl my-10">Account Actions</h2>
+            <h2 className="text-3xl my-10 text-pail_blue">Account Actions</h2>
             <div className="w-full">
                 <Carousel>
                     <AccountActionsCard 
