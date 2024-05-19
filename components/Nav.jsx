@@ -13,7 +13,7 @@ const Nav = () => {
             <div>
                 <Link href="/" className="">
                     <Image 
-                        src="/assets/images/logo.svg" 
+                        src="/assets/images/PailLogo_Navy.svg" 
                         alt="Pail Logo" 
                         width={100}
                         height={100}

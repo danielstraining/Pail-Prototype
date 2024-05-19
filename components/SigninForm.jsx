@@ -64,7 +64,7 @@ function SigninForm(){
                             className="object-contain mb-5"
                         />
                     </Link>
-                    <div className="shadow-xl p-8 bg-blue-50 rounded-xl w-[450px] font-palanquin">
+                    <div className="shadow-xl p-8 bg-pail_tan rounded-xl w-[450px] font-palanquin">
                         <h1 className="text-3xl text-center mt-1 mb-3">Sign In</h1>
                         <form 
                             className="!m-0 p-0"
@@ -81,7 +81,7 @@ function SigninForm(){
                             <button
                                 type="submit"
                                 disabled={submitting}
-                                className="black_btn my-6 w-full">
+                                className="black_btn bg-pail_navy border-pail_navy my-6 w-full">
                                 {submitting? "Signing In..." : "Sign In"}
                             </button> 
                         </form> 
