@@ -44,24 +44,25 @@ const CreateListingVariations = () => {
 const CreateListingDynamicPricing = () => {
     return (
         <section>
-            <div className="w-full h-80 bg-pail_tan rounded-xl p-5">
+            <div className="w-full bg-pail_tan rounded-xl p-5">
                 <h2 className="text-2xl mb-5">Dynamic Pricing</h2>
                 <div className="text-xl mb-5">
-                    <p className="my-5"> 
+                    <p className="my-5">
                         The minimum order quantity is
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity"/>
+                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
                         units costing $
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice"/>
+                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
                         per unit.
                     </p>
-                    <p className="my-5"> 
+                    <p className="my-5">
                         The lowest unit price is $
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity"/>
+                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
                         per unit occuring at
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice"/>
+                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
                         units.
                     </p>
                 </div>
+                <div className="w-full h-96 bg-white rounded-xl"></div>
             </div>
         </section>
     )
@@ -97,23 +98,27 @@ const CreateListingImages = ({ images = [] }) => {
 
 export const CreateListing = () => {
     return (
-        <section className="flex gap-5">
-            <div className="w-3/5 flex flex-col gap-5">
-                <CreateListingImages />
-                <CreateListingDynamicPricing />
+        <section>
+            <div className="flex gap-5 mb-5">
+                <div className="w-3/5 flex flex-col gap-5">
+                    <CreateListingImages />
+                    <CreateListingDynamicPricing />
+                </div>
+                <div className="w-2/5 flex flex-col gap-5">
+                    <CreateListingTitle />
+                    <CreateListingDescription />
+                    <CreateListingVariations />
+                    <button
+                        type="button"
+                        onClick={() => { }}
+                        className="black_btn bg-pail_blue border-pail_blue mx-auto cursor-pointer my-5 w-full">
+                        Preview listing
+                    </button>
+                </div>
             </div>
-            <div className="w-2/5 flex flex-col gap-5">
-                <CreateListingTitle />
-                <CreateListingDescription />
-                <CreateListingVariations />
-                <button
-                    type="button"
-                    onClick={() => { }}
-                    className="black_btn bg-pail_blue border-pail_blue mx-auto cursor-pointer my-5 w-full">
-                    Preview listing
-                </button>
-            </div>
+            
         </section>
+
 
 
     )
