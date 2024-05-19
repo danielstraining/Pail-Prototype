@@ -14,7 +14,12 @@ module.exports = {
         palanquin: ['Palanquin Dark', 'sans-serif'],
       },
       colors: {
-        'primary-orange': '#FF5722',
+        pail_navy: '#0b122a',
+        pail_tan: "#feedcd",
+        pail_cream: "#fefef3",
+        pail_blue: "#3a68ca",
+        pail_green: "#14796e",
+        pail_red: "#eb0d05",
       }
     },
   },

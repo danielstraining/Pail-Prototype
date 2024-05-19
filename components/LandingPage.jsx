@@ -16,8 +16,8 @@ const LandingPage = () => {
             <section>
                 <div className="flex justify-between px-28 pb-20 pt-10">
                     <div className='w-1/2'>
-                    <h1 className='text-7xl font-palanquin my-10'>Become a seller on Pail</h1>
-                        <p className='text-2xl font-palanquin my-10'>Reach more customers than ever before</p>
+                    <h1 className={`text-7xl font-palanquin my-10 text-pail_green`}>Become a seller on Pail</h1>
+                        <p className='text-2xl font-palanquin my-10 text-pail_green'>Reach more customers than ever before</p>
                         <button
                             type="button"
                             onClick = {handleSignUp}
