@@ -10,9 +10,9 @@ export const metadata = {
 const RootLayout = ( { children }) => {
   return (
     <html lang='en'>
-        <body>
+        <body className='font-palanquin text-pail_navy'>
             <AuthProvider>
-              <div className='absolute left-0 right-0 top-0 h-fit bg-pail_cream'>
+              <div className='absolute left-0 right-0 top-0 h-fit bg-pail_cream -z-50'>
                 {children}
                 <Footer/>
               </div>

@@ -3,7 +3,7 @@ import Image from "next/image"
 
 export const Footer = () => {
     return (
-        <footer>
+        <footer className="z-50">
             <div className="w-full px-28 bg-pail_blue flex justify-start items-center py-7">
                 <div className="flex justify-between items-center">
                     <Image
