@@ -165,59 +165,65 @@ function SignupForm() {
 
     return (
         <>
-            <div className="w-full h-screen flex justify-center items-center py-20">
-                <div className="flex flex-col items-center">
-                    {passwordMatchError && (
-                        <div>Passwords do not match!</div>
-                    )}
-                    {existingEmailError && (
-                        <div>Email already exists!</div>
-                    )}
-                    {emailFormatError && (
-                        <div>Email is not correct format!</div>
-                    )}
-                    {passwordFormatError && (
-                        <div>Password is not correct format!</div>
-                    )}
-                    <Link
-                    href={"/"}>
+            <aside className="w-fit min-h-screen top-0 left-0 -z-10">
+                <div className="shadow-xl p-8 bg-pail_tan">
+                {passwordMatchError && (
+                    <div>Passwords do not match!</div>
+                )}
+                {existingEmailError && (
+                    <div>Email already exists!</div>
+                )}
+                {emailFormatError && (
+                    <div>Email is not correct format!</div>
+                )}
+                {passwordFormatError && (
+                    <div>Password is not correct format!</div>
+                )}    
+                <h1 className="text-3xl text-center my-10">Sign up for an account</h1>
+                    <div className="relative flex justify-center items-center w-full my-10">
+                        <Link
+                            href={"/"}>
+                            <Image
+                                src="/assets/images/PailLogo_Navy.svg"
+                                alt="Pail Logo"
+                                width={100}
+                                height={100}
+                                className="object-contain mb-5"
+                            />
+                        </Link>
                         <Image
-                            src="/assets/images/logo.svg"
-                            alt="Pail Logo"
-                            width={100}
-                            height={100}
-                            className="object-contain mb-5"
-                        />
-                    </Link>
-                    <div className="shadow-xl p-8 bg-blue-50 rounded-xl w-[450px] font-palanquin">
-                        <h1 className="text-3xl text-center mt-1 mb-3">Create Account</h1>
-                        <form
-                            className="!m-0 p-0"
-                            action={handleSignUp}
-                        >
-                            <div className="my-4">
-                                <h2 className="input_header">Email</h2>
-                                <input onChange={(e) => setEmail(e.target.value.toLowerCase())} className="form_input" type="email" placeholder="example@business.com" required name="email"></input>
-                            </div>
-                            <div className="my-4">
-                                <h2 className="input_header">Password</h2>
-                                <input onChange={(e) => setPassword(e.target.value)} className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input>
-                            </div>
-                            <div className="my-4">
-                                <h2 className="input_header">Confirm Password</h2>
-                                <input onChange={(e) => setConfirmPassword(e.target.value)} className="form_input" type="password" required name="confirmPassword"></input>
-                            </div>
-                            <button
-                                type="submit"
-                                disabled={submitting}
-                                className="black_btn my-6 w-full">
-                                {submitting ? "Processing..." : "Register"}
-                            </button>
-                        </form>
-                        <p className="w-full text-center !m-0" type="hidden">Already have an account? <Link href="/signin" className=" text-blue-700">Sign In</Link></p>
+                            src="/assets/images/ColouredSplash2.svg"
+                            alt="Splash graphic"
+                            width={0}
+                            height={0}
+                            className="absolute w-full" />
                     </div>
+                    <form
+                        className="!m-0 p-0"
+                        action={handleSignUp}
+                    >
+                        <div className="my-5">
+                            <h2 className="input_header">Email</h2>
+                            <input onChange={(e) => setEmail(e.target.value.toLowerCase())} className="form_input" type="email" placeholder="example@business.com" required name="email"></input>
+                        </div>
+                        <div className="my-5">
+                            <h2 className="input_header">Password</h2>
+                            <input onChange={(e) => setPassword(e.target.value)} className="form_input" type="password" placeholder="Must have at least 8 characters" required name="password"></input>
+                        </div>
+                        <div className="my-5">
+                            <h2 className="input_header">Confirm Password</h2>
+                            <input onChange={(e) => setConfirmPassword(e.target.value)} className="form_input" type="password" required name="confirmPassword"></input>
+                        </div>
+                        <button
+                            type="submit"
+                            disabled={submitting}
+                            className="black_btn bg-pail_navy border-pail_navy my-10 w-full">
+                            {submitting ? "Processing..." : "Register"}
+                        </button>
+                    </form>
+                    <p className="w-full text-center my-10" type="hidden">Already have an account? <Link href="/signin" className="hover:underline text-pail_blue">Sign In</Link></p>
                 </div>
-            </div>
+            </aside>
         </>
     )
 }

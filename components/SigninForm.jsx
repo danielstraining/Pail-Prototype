@@ -49,12 +49,11 @@ function SigninForm() {
 
     return (
         <>
-            <aside className="w-fit h-screen top-0 left-0 -z-10">
-                {invalidLoginError && (
-                    <div>Invalid Login details</div>
-                )}
-
+            <aside className="w-fit min-h-screen top-0 left-0 -z-10">
                 <div className="shadow-xl h-full p-8 bg-pail_tan font-palanquin">
+                    {invalidLoginError && (
+                        <div>Invalid Login details</div>
+                    )}
                     <h1 className="text-3xl text-center my-10">Log in to your account</h1>
                     <div className="relative flex justify-center items-center w-full my-10">
                         <Link
@@ -94,7 +93,7 @@ function SigninForm() {
                             {submitting ? "Signing In..." : "Sign In"}
                         </button>
                     </form>
-                    <p className="w-full text-center my-10" type="hidden">Don't have an account? <Link href="/signup" className=" hover:underline text-pail_blue">Sign Up</Link></p>
+                    <p className="w-full text-center my-10" type="hidden">Don't have an account? <Link href="/signup" className="hover:underline text-pail_blue">Sign Up</Link></p>
                 </div>
             </aside>
         </>
