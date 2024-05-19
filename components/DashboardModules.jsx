@@ -5,7 +5,7 @@ export const Listings = ({ children = [], setPage }) => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Your listings</h2>
-            <div className="w-full flex justify-center bg-blue-50 rounded-xl my-10 p-5">
+            <div className="w-full flex justify-center bg-pail_tan rounded-xl my-10 p-5">
                 {children?.length === 0 &&
                     <div className="relative flex flex-col w-full items-center my-10">
                         <h1 className="text-3xl mb-10">You have no products listed yet!</h1>
@@ -13,11 +13,11 @@ export const Listings = ({ children = [], setPage }) => {
                         <button
                             type="button"
                             onClick={() => { setPage('createListing') }}
-                            className="black_btn z-10">
+                            className="black_btn bg-pail_navy border-pail_navy z-10">
                             <Plus size={50} />
                         </button>
                         <Image
-                            src="/assets/images/splash2.svg"
+                            src="/assets/images/ColouredSplash2.svg"
                             alt="Splash graphic"
                             width={0}
                             height={0}
@@ -33,7 +33,7 @@ export const HomeOverview = () => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Overview</h2>
-            <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+            <div className="w-full h-80 bg-pail_tan rounded-xl my-10"></div>
         </section>
     )
 }
@@ -42,7 +42,7 @@ export const OrdersOverview = () => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Overview</h2>
-            <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+            <div className="w-full h-80 bg-pail_tan rounded-xl my-10"></div>
         </section>
     )
 }
@@ -51,7 +51,7 @@ export const BillingsOverview = () => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Overview</h2>
-            <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+            <div className="w-full h-80 bg-pail_tan rounded-xl my-10"></div>
         </section>
     )
 }
@@ -60,7 +60,7 @@ export const StatisticsOverview = () => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Overview</h2>
-            <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+            <div className="w-full h-80 bg-pail_tan rounded-xl my-10"></div>
         </section>
     )
 }
@@ -69,7 +69,7 @@ export const SalesSummary = () => {
     return (
         <section className="my-16">
             <h2 className="text-3xl my-10">Sales Summary</h2>
-            <div className="w-full h-80 bg-blue-50 rounded-xl my-10"></div>
+            <div className="w-full h-80 bg-pail_tan rounded-xl my-10"></div>
         </section>
     )
 }

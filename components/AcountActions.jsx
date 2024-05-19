@@ -7,7 +7,7 @@ export function AccountActions( {children} ){
 
     return (
         <section className="w-full my-16">
-            <h2 className="text-3xl font-palanquin my-10">Account Actions</h2>
+            <h2 className="text-3xl my-10">Account Actions</h2>
             <div className="w-full">
                 <Carousel>
                     <AccountActionsCard 
@@ -82,16 +82,16 @@ export function Carousel( {children} ){
 
 export function AccountActionsCard({ title, description, icon, onClickFunction }){
     return (
-        <li className="w-72 p-5 my-5 bg-blue-50 rounded-xl font-palanquin mr-10">
+        <li className="w-72 p-5 my-5 bg-pail_tan rounded-xl mr-10">
             <div className="flex justify-between items-center mb-5 pr-3">
-                <h1 className="text-2xl">{title}</h1>  
+                <h1 className="text-pail_blue text-2xl">{title}</h1>  
                 {icon}
             </div>
-            <p className="mb-5 text-xl text-gray-600">{description}</p>
+            <p className="mb-5 text-xl text-pail_navy">{description}</p>
             <button
                 type="button"
                 onClick = {onClickFunction}
-                className="black_btn cursor-pointer">
+                className="black_btn bg-pail_navy border-pail_navy cursor-pointer">
                 Complete now
             </button> 
         </li>
