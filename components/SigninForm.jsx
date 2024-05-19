@@ -57,7 +57,9 @@ function SigninForm() {
                     <h1 className="text-3xl text-center my-10">Log in to your account</h1>
                     <div className="relative flex justify-center items-center w-full my-10">
                         <Link
-                            href={"/"}>
+                            href={"/"}
+                            className="z-10"
+                        >
                             <Image
                                 src="/assets/images/PailLogo_Navy.svg"
                                 alt="Pail Logo"

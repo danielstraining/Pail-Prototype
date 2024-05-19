@@ -167,22 +167,24 @@ function SignupForm() {
         <>
             <aside className="w-fit min-h-screen top-0 left-0 -z-10">
                 <div className="shadow-xl p-8 bg-pail_tan">
-                {passwordMatchError && (
-                    <div>Passwords do not match!</div>
-                )}
-                {existingEmailError && (
-                    <div>Email already exists!</div>
-                )}
-                {emailFormatError && (
-                    <div>Email is not correct format!</div>
-                )}
-                {passwordFormatError && (
-                    <div>Password is not correct format!</div>
-                )}    
-                <h1 className="text-3xl text-center my-10">Sign up for an account</h1>
+                    {passwordMatchError && (
+                        <div>Passwords do not match!</div>
+                    )}
+                    {existingEmailError && (
+                        <div>Email already exists!</div>
+                    )}
+                    {emailFormatError && (
+                        <div>Email is not correct format!</div>
+                    )}
+                    {passwordFormatError && (
+                        <div>Password is not correct format!</div>
+                    )}
+                    <h1 className="text-3xl text-center my-10">Create your account</h1>
                     <div className="relative flex justify-center items-center w-full my-10">
                         <Link
-                            href={"/"}>
+                            href={"/"}
+                            className="z-10"
+                        >
                             <Image
                                 src="/assets/images/PailLogo_Navy.svg"
                                 alt="Pail Logo"
@@ -190,6 +192,7 @@ function SignupForm() {
                                 height={100}
                                 className="object-contain mb-5"
                             />
+
                         </Link>
                         <Image
                             src="/assets/images/ColouredSplash2.svg"
