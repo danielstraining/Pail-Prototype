@@ -24,13 +24,13 @@ const Nav = () => {
                 <button
                     type="button"
                     onClick = {() => {router.push("/signup")}}
-                    className="black_btn">
+                    className="black_btn bg-pail_navy border-pail_navy my-10">
                     Sign Up
                 </button>
                 <button
                     type="button"
                     onClick = {() => {router.push("/signin")}}
-                    className="black_btn">
+                    className="black_btn bg-pail_navy border-pail_navy my-10">
                     Sign In
                 </button>
             </div>
