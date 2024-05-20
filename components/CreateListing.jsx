@@ -1,5 +1,5 @@
 import Image from "next/image"
-
+import Plot from 'react-plotly.js';
 
 const CreateListingTitle = () => {
     return (
@@ -62,7 +62,22 @@ const CreateListingDynamicPricing = () => {
                         units.
                     </p>
                 </div>
-                <div className="w-full h-96 bg-white rounded-xl"></div>
+                <div className="w-full bg-white rounded-xl my-5">
+                    <Plot
+                        className="w-full"
+                        data={[
+                            {
+                                x: [1, 2, 3],
+                                y: [2, 6, 3],
+                                type: 'scatter',
+                                mode: 'lines+markers',
+                                marker: { color: 'red' },
+                            },
+                            { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
+                        ]}
+                        layout={{title: 'Dynamic Pricing' }}
+                    />
+                </div>
             </div>
         </section>
     )
@@ -116,7 +131,7 @@ export const CreateListing = () => {
                     </button>
                 </div>
             </div>
-            
+
         </section>
 
 
