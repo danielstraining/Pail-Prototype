@@ -57,12 +57,12 @@ const CreateListingDynamicPricing = () => {
                     <p className="my-5">
                         The lowest unit price is $
                         <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
-                        per unit occuring at
+                        per unit occuring from
                         <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
                         units.
                     </p>
                 </div>
-                <div className="w-full bg-white rounded-xl my-5">
+                <div className="w-full bg-white rounded-xl my-10">
                     <Plot
                         className="w-full"
                         data={[
