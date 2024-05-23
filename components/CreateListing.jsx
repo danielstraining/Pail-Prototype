@@ -1,5 +1,6 @@
 import Image from "next/image"
 import Plot from 'react-plotly.js';
+import { useState, useEffect } from "react";
 
 const CreateListingTitle = () => {
     return (
@@ -42,6 +43,31 @@ const CreateListingVariations = () => {
 }
 
 const CreateListingDynamicPricing = () => {
+    const [minOrderQuantity, setMinOrderQuantity] = useState()
+    const [maxOrderQuantity, setMaxOrderQuantity] = useState()
+    const [minUnitPrice, setMinUnitPrice] = useState()
+    const [maxUnitPrice, setMaxUnitPrice] = useState()
+    const [x, setX] = useState([])
+    const [y, setY] = useState([])
+
+    useEffect(() => {
+        const xValues = []
+        const yValues = []
+
+        const m = ((minUnitPrice - maxUnitPrice) / (maxOrderQuantity - minOrderQuantity))
+        const c = maxUnitPrice - (m * minOrderQuantity)
+
+        for (let x = minOrderQuantity; x <= maxOrderQuantity; x++) {
+            xValues.push(x)
+            yValues.push((m * x) + c)
+        }
+        setX(xValues)
+        setY(yValues)
+        console.log(xValues)
+
+    }, [minOrderQuantity, maxOrderQuantity, minUnitPrice, maxUnitPrice]);
+
+
     return (
         <section>
             <div className="w-full bg-pail_tan rounded-xl p-5">
@@ -49,33 +75,51 @@ const CreateListingDynamicPricing = () => {
                 <div className="text-xl mb-5">
                     <p className="my-5">
                         The minimum order quantity is
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
+                        <input onChange={(e) => setMinOrderQuantity(e.target.value)} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
                         units costing $
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
+                        <input onChange={(e) => setMaxUnitPrice(e.target.value)} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
                         per unit.
                     </p>
                     <p className="my-5">
                         The lowest unit price is $
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
+                        <input onChange={(e) => setMinUnitPrice(e.target.value)} className="form_input w-20 mx-2" required name="MinOrderQuantity" />
                         per unit occuring from
-                        <input onChange={() => { }} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
+                        <input onChange={(e) => setMaxOrderQuantity(e.target.value)} className="form_input w-20 mx-2" required name="MaxUnitPrice" />
                         units.
                     </p>
                 </div>
-                <div className="flex justify-center items-center w-full h-auto bg-white rounded-xl my-10">
+                <div className="flex justify-center items-center w-full h-auto bg-white rounded-xl my-10 pb-5">
                     <Plot
                         className="w-[90%] h-auto"
                         data={[
                             {
-                                x: [1, 2, 3],
-                                y: [2, 6, 3],
-                                type: 'scatter',
-                                mode: 'lines+markers',
-                                marker: { color: 'red' },
+                                x: x,
+                                y: y,
+                                mode: 'lines',
+                                marker: { color: '#3a68ca' },
                             },
-                            { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                         ]}
-                        layout={{autosize: true, title: 'Dynamic Pricing' }}
+                        layout={{
+                            autosize: true, 
+                            title: 'Dynamic Pricing', 
+                            titlefont: {size: 24, color: '12204A', family: 'Palanquin Dark, sans-serif'},
+                            xaxis: {
+                                title: "Order Quantity",
+                                titlefont: {
+                                    family: 'Palanquin Dark, sans-serif',
+                                    size: 20,
+                                    color: '#12204A'
+                                }
+                            },
+                            yaxis: {
+                                title: "Unit Price ($)",
+                                titlefont: {
+                                    family: "Palanquin Dark, sans-serif",
+                                    size: 20,
+                                    color: '#12204A'
+                                }
+                            },
+                        }}
                         useResizeHandler={true}
                     />
                 </div>
