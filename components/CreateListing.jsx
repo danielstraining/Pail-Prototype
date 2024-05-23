@@ -62,9 +62,9 @@ const CreateListingDynamicPricing = () => {
                         units.
                     </p>
                 </div>
-                <div className="w-full h-auto bg-white rounded-xl my-10">
+                <div className="flex justify-center items-center w-full h-auto bg-white rounded-xl my-10">
                     <Plot
-                        className="w-full h-auto"
+                        className="w-[90%] h-auto"
                         data={[
                             {
                                 x: [1, 2, 3],
