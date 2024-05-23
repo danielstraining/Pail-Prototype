@@ -62,9 +62,9 @@ const CreateListingDynamicPricing = () => {
                         units.
                     </p>
                 </div>
-                <div className="w-full bg-white rounded-xl my-10">
+                <div className="w-full h-auto bg-white rounded-xl my-10">
                     <Plot
-                        className="w-full"
+                        className="w-full h-auto"
                         data={[
                             {
                                 x: [1, 2, 3],
@@ -75,7 +75,8 @@ const CreateListingDynamicPricing = () => {
                             },
                             { type: 'bar', x: [1, 2, 3], y: [2, 5, 3] },
                         ]}
-                        layout={{title: 'Dynamic Pricing' }}
+                        layout={{autosize: true, title: 'Dynamic Pricing' }}
+                        useResizeHandler={true}
                     />
                 </div>
             </div>
